@@ -98,8 +98,8 @@
                    <td><h1>RENTITALL</h1></td>
                 </tr>
                 <tr>
-                    <td><label htmlfor="username">Username:</label></td>
-                    <td><input type="text" id="username" name="username" placeholder="User"required></td>
+                    <td><label htmlfor="email">email:</label></td>
+                    <td><input type="text" id="email" name="email" placeholder="email@gmail.com"required></td>
                 </tr>
                 <tr>
                     <td><label for="password">Password:</label></td>
