@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -15,6 +16,8 @@
       justify-content: space-between;
       width: 100%;
       z-index: 1000;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .left-section {
@@ -56,7 +59,6 @@
       display: inline-block;
     }
 
-    /* Hide the checkbox */
     .account-menu-checkbox {
       display: none;
     }
@@ -68,41 +70,32 @@
       border-radius: 50%;
     }
 
-    /* Initially hide the dropdown */
-    .menu-dropdown {
-      display: none;
+    .dropdown-menu {
       position: absolute;
       top: 60px;
       right: 0;
       background-color: white;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      min-width: 150px;
-      z-index: 100;
+      display: none;
+      flex-direction: column;
+      width: 150px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    /* Show the dropdown when the checkbox is checked */
-    .account-menu-checkbox:checked + .menu-dropdown {
-      display: block;
-    }
-
-    .menu-dropdown a {
-      display: block;
-      padding: 10px 15px;
+    .dropdown-menu a {
+      padding: 10px;
       text-decoration: none;
       color: black;
-      font-size: 14px;
+      display: block;
     }
 
-    .menu-dropdown a:hover {
-      background-color: #f4f4f4;
+    .dropdown-menu a:hover {
+      background-color: #f0f0f0;
     }
 
-    .menu-dropdown .welcome-message {
-      font-weight: bold;
-      padding: 10px 15px;
-      text-align: center;
+    .account-menu-checkbox:checked + label + .dropdown-menu {
+      display: flex;
     }
   </style>
 </head>
@@ -123,16 +116,13 @@
       <button class="postad-button" type="button">Post your ad</button>
     </a>
     <div class="account-menu-container">
-      <!-- Hidden checkbox to control dropdown visibility -->
       <input type="checkbox" id="account-menu-checkbox" class="account-menu-checkbox">
       <label for="account-menu-checkbox">
         <img src="recources/account.png" alt="account" class="account-icon">
       </label>
-
-      <!-- Dropdown menu -->
-      <div class="menu-dropdown">
-        <a href="Signin.php">Sign In</a>
-        <a href="Signup.html">Sign Up</a>
+      <div class="dropdown-menu">
+        <a href="signUp.php">Sign Up</a>
+        <a href="signIn.php">Sign In</a>
       </div>
     </div>
   </div>
