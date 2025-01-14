@@ -1,44 +1,134 @@
-<?php
-// Database connection
-$con = mysqli_connect('localhost', 'new', '', 'rentitall');
-if (!$con) {
-    die('Connection Failed: ' . mysqli_error($con));
-}
+<!DOCTYPE html>
+<head>
+    <title>Sign Up Form</title>
+    <style>
+        body {
+            font-family: serif ;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(recources/7.jpg);
+            color: white; 
+        }
 
-// Check if the form is submitted via POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect and sanitize user inputs
-    $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : null;
-    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : null;
-    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : null;
-    $phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : null;
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgb(0, 0, 0);
+            width: 100%;
+            max-width: 400px;
+        }
 
-    // Check required fields
-    if (empty($username) || empty($password) || empty($email)) {
-        die('Error: Username, Password, and Email are required fields.');
-    }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    // Hash the password for security
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        table {
+            width: 100%;
+            border-spacing: 10px;
+        }
 
-    // Prepare and execute the SQL statement
-    $stmt = $con->prepare("INSERT INTO account (Username, Password, Email, Phone) VALUES (?, ?, ?, ?)");
-    if (!$stmt) {
-        die('Statement Preparation Failed: ' . mysqli_error($con));
-    }
+        td {
+            padding: 5px;
+        }
 
-    // Bind parameters and execute the query
-    $stmt->bind_param("ssss", $username, $hashedPassword, $email, $phone);
-    if ($stmt->execute()) {
-        echo "Registration Successful!";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+        label {
+            font-weight: bold;
+            font-size: 20px;
+        }
 
-    // Close the statement and database connection
-    $stmt->close();
-    $con->close();
-} else {
-    echo "Invalid Request.";
-}
-?>
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buttons .sign-up {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .buttons .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .login-link a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="SignUp.php" method="post">
+            <table>
+                <tr>
+                   <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td> 
+                   <td><h1>RENTITALL</h1></td>
+                </tr>
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input type="text" id="username" name="username" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone Number:</label></td>
+                    <td><input type="tel" id="phone" name="phone"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="buttons">
+                            <button type="button" class="cancel">Cancel</button>
+                            <button type="submit" class="sign-up">Sign Up</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="#"><b>Click here</b> to log in</a><br><br>
+            © 2024.All rights reserved
+            </div>
+    </div>
+</body>
+</html>
