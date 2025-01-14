@@ -16,6 +16,7 @@
             height: 140px;
             position: relative;
             border: none;
+            
         }
         footer {
             width: 100%;
@@ -29,12 +30,14 @@
             width: 100%;
             height: 100%;
             border: none;
+           
         }
         .container {
             margin: 0 auto;
             margin-bottom: 170px;
             padding: 20px;
             max-width: 1200px;
+
         }
         .navigation {
             display: flex;

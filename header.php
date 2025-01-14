@@ -3,100 +3,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
+body {
+  margin: 0;
+  padding: 0;
+}
 
-    header {
-      position: fixed;
-      display: flex;
-      padding: 0;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      z-index: 1000;
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+header {
+  position: fixed;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 9999; /* Ensure header stays on top */
+}
 
-    .left-section {
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
-    }
+.left-section {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
 
-    .right-section {
-      margin-right: 10px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+.right-section {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
-    button {
-      height: 40px;
-      width: 100px;
-    }
+button {
+  height: 40px;
+  width: 100px;
+}
 
-    .postad-button {
-      background-color: rgb(163, 67, 67);
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      color: white;
-    }
+.postad-button {
+  background-color: rgb(163, 67, 67);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
 
-    .alladd-button {
-      background-color: rgb(42, 165, 79);
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      color: white;
-    }
+.alladd-button {
+  background-color: rgb(42, 165, 79);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
 
-    .account-menu-container {
-      position: relative;
-      display: inline-block;
-    }
+.account-menu-container {
+  position: relative;
+  display: inline-block;
+}
 
-    .account-menu-checkbox {
-      display: none;
-    }
+.account-menu-checkbox {
+  display: none;
+}
 
-    .account-icon {
-      cursor: pointer;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
+.account-icon {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 
-    .dropdown-menu {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      display: none;
-      flex-direction: column;
-      width: 150px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+.dropdown-menu {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  width: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
 
-    .dropdown-menu a {
-      padding: 10px;
-      text-decoration: none;
-      color: black;
-      display: block;
-    }
+.dropdown-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  display: block;
+ 
+}
 
-    .dropdown-menu a:hover {
-      background-color: #f0f0f0;
-    }
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
 
-    .account-menu-checkbox:checked + label + .dropdown-menu {
-      display: flex;
-    }
+.account-menu-checkbox:checked + label + .dropdown-menu {
+  display: flex; /* Show the dropdown when checkbox is checked */
+}
+
   </style>
 </head>
 <body>
@@ -109,7 +110,7 @@
   </div>
 
   <div class="right-section">
-    <a href="allads.php" target="_top">
+    <a href="browse.php" target="_top">
       <button class="alladd-button">All ads</button>
     </a>
     <a href="postad.html" target="_top">
@@ -121,9 +122,9 @@
         <img src="recources/account.png" alt="account" class="account-icon">
       </label>
       <div class="dropdown-menu">
-        <a href="signUp.php">Sign Up</a>
-        <a href="signIn.php">Sign In</a>
-        <a href="myitems.html">My Items</a>
+        <a href="SignUp.html" target="_top">Sign Up</a>
+        <a href="signIn.html" target="_top">Sign In</a>
+        <a href="myitems.php" target="_top">My Items</a>
       </div>
     </div>
   </div>
