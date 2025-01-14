@@ -1,4 +1,10 @@
+<?php
+// Start the session to track login status
+session_start();
+$isLoggedIn = isset($_SESSION['user']); // Check if user is logged in
+?>
 <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,19 +89,36 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .dropdown-menu a {
+    .dropdown-menu a,
+    .dropdown-menu form {
       padding: 10px;
       text-decoration: none;
       color: black;
       display: block;
     }
 
-    .dropdown-menu a:hover {
+    .dropdown-menu a:hover,
+    .dropdown-menu form:hover {
       background-color: #f0f0f0;
     }
 
     .account-menu-checkbox:checked + label + .dropdown-menu {
       display: flex;
+    }
+
+    .logout-button {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: left;
+      color: black;
+    }
+
+    .logout-button:hover {
+      background-color: #f0f0f0;
     }
   </style>
 </head>
@@ -121,9 +144,16 @@
         <img src="recources/account.png" alt="account" class="account-icon">
       </label>
       <div class="dropdown-menu">
-        <a href="signUp.php">Sign Up</a>
-        <a href="signIn.php">Sign In</a>
-        <a href="myitems.html">My Items</a>
+        <?php if ($isLoggedIn): ?>
+          <a href="myitems.html">My Items</a>
+          <form action="logout.php" method="POST">
+            <button type="submit" class="logout-button">Logout</button>
+          </form>
+        <?php else: ?>
+          <a href="signUp.php">Sign Up</a>
+          <a href="signIn.php">Sign In</a>
+          <a href="myitems.html">My Items</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
