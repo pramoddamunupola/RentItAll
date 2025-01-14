@@ -132,7 +132,7 @@ include("connection.php");
 
 // Fetch category and search term from URL parameters
 $category = isset($_GET["category"]) ? $_GET["category"] : "all";
-$searchTerm = isset($_GET["search"]) ? mysqli_real_escape_string($conn, $_GET["search"]) : "";
+$searchTerm = isset($_GET["search"]) ? $_GET["search"] : "";
 
 // Base query to fetch items
 $query = "SELECT * FROM items";
@@ -141,7 +141,7 @@ $query = "SELECT * FROM items";
 if ($category !== "all" || !empty($searchTerm)) {
     $query .= " WHERE";
     if ($category !== "all") {
-        $query .= " category = '" . mysqli_real_escape_string($conn, $category) . "'";
+        $query .= " category = '" . $category . "'";
     }
     if (!empty($searchTerm)) {
         if ($category !== "all") {
@@ -166,7 +166,7 @@ $result = mysqli_query($conn, $query);
             <!-- Form to handle search -->
             <form method="GET" action="browse.php">
                 <input type="hidden" name="category" value="<?php echo $category; ?>">
-                <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
+                <input type="text" name="search" placeholder="Search your items" value="<?php echo $searchTerm; ?>">
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -188,12 +188,13 @@ $result = mysqli_query($conn, $query);
             <?php
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $name = htmlspecialchars($row['name']);
-                    $category = htmlspecialchars($row['category']);
-                    $description = htmlspecialchars($row['description']);
-                    $location = htmlspecialchars($row['location']);
-                    $image = htmlspecialchars($row['image1']);
-                    $contact = htmlspecialchars($row['contact']);
+                    // Note: Removed htmlspecialchars here too
+                    $name = $row['name'];
+                    $category = $row['category'];
+                    $description = $row['description'];
+                    $location = $row['location'];
+                    $image = $row['image1'];
+                    $contact = $row['contact'];
                     ?>
                     <div class="item">
                         <img src="<?php echo $image; ?>" alt="Item Image">
@@ -220,3 +221,4 @@ $result = mysqli_query($conn, $query);
 <footer><iframe src="footer.html"></iframe></footer>
 </body>
 </html>
+
