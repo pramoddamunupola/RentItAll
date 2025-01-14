@@ -126,7 +126,7 @@
             
         </form>
         <div class="login-link">
-            Already have an account? <a href="#"><b>Click here</b> to Sign in</a><br><br>
+            Already have an account? <a href="SignIn.php"><b>Click here</b> to Sign in</a><br><br>
             © 2025.All rights reserved
             </div>
     </div>
