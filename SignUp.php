@@ -98,20 +98,20 @@
                    <td><h1>RENTITALL</h1></td>
                 </tr>
                 <tr>
-                    <td><label for="username">Username:</label></td>
-                    <td><input type="text" id="username" name="username" required></td>
+                    <td><label htmlfor="username">Username:</label></td>
+                    <td><input type="text" id="username" name="username" placeholder="User"required></td>
                 </tr>
                 <tr>
                     <td><label for="password">Password:</label></td>
-                    <td><input type="password" id="password" name="password" required></td>
+                    <td><input type="password" id="password" name="password" placeholder="Password"required></td>
                 </tr>
                 <tr>
                     <td><label for="email">Email:</label></td>
-                    <td><input type="email" id="email" name="email" required></td>
+                    <td><input type="email" id="email" name="email" placeholder="acdefg@gmail.com"required></td>
                 </tr>
                 <tr>
                     <td><label for="phone">Phone Number:</label></td>
-                    <td><input type="tel" id="phone" name="phone"></td>
+                    <td><input type="tel" id="phone" name="phone" placeholder="07xxxxxxxx" required></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -126,8 +126,8 @@
             
         </form>
         <div class="login-link">
-            Already have an account? <a href="#"><b>Click here</b> to log in</a><br><br>
-            © 2024.All rights reserved
+            Already have an account? <a href="#"><b>Click here</b> to Sign in</a><br><br>
+            © 2025.All rights reserved
             </div>
     </div>
 </body>
