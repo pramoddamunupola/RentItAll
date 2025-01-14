@@ -107,7 +107,7 @@
                 </tr>
                 <tr>
                     <td><label for="email">Email:</label></td>
-                    <td><input type="email" id="email" name="email" placeholder="acdefg@gmail.com"required></td>
+                    <td><input type="email" id="email" name="email" placeholder="email@gmail.com"required></td>
                 </tr>
                 <tr>
                     <td><label for="phone">Phone Number:</label></td>
