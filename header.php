@@ -124,7 +124,6 @@
         <a href="signUp.php">Sign Up</a>
         <a href="signIn.php">Sign In</a>
         <a href="myitems.html">My Items</a>
-      </div>
     </div>
   </div>
 </header>
