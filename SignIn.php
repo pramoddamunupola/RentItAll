@@ -91,7 +91,7 @@
 </head>
 <body>
     <div class="container">
-        <form>
+        <form method="post" action="SignInData.php">
             <table>
                 <tr>
                    <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td> 
