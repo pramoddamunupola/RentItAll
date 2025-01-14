@@ -76,7 +76,7 @@
 
         .login-link {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 15px;s
         }
 
         .login-link a {
@@ -91,7 +91,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="SignUp.php" method="post">
+        <form action="SignUpData.php" method="post">
             <table>
                 <tr>
                    <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td> 
