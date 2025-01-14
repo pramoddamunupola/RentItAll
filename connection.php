@@ -1,7 +1,7 @@
 <?php
 // Database configuration
-$host = "cloud3.googiehost.com";       // Hostname (e.g., localhost or IP address)
-$username = "rentital__jsmqCik67zs9qisp8K1ViyDSNRcyHxUS@localhost";        // Database username
+$host = "localhost";       // Hostname (e.g., localhost or IP address)
+$username = "rentital_root";        // Database username
 $password = "rentitall@123456";            // Database password
 $database = "rentital_rentitall"; // Database name
 
@@ -12,7 +12,7 @@ $conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } else {
-    echo "Connected successfully!";
+    echo "";
 }
 
 // Close the connection (optional in persistent scripts)
