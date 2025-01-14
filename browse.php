@@ -105,6 +105,8 @@
             padding: 10px;
             gap: 15px;
             align-items: center;
+            text-decoration: none;
+            color: inherit;
         }
         .item img {
             width: 150px;
@@ -141,13 +143,13 @@ $query = "SELECT * FROM items";
 if ($category !== "all" || !empty($searchTerm)) {
     $query .= " WHERE";
     if ($category !== "all") {
-        $query .= " category = '" . $category . "'";
+        $query .= " category = '" . mysqli_real_escape_string($conn, $category) . "'";
     }
     if (!empty($searchTerm)) {
         if ($category !== "all") {
             $query .= " AND";
         }
-        $query .= " (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR location LIKE '%$searchTerm%')";
+        $query .= " (name LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR description LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR location LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%')";
     }
 }
 
@@ -165,8 +167,8 @@ $result = mysqli_query($conn, $query);
         <div class="search-bar">
             <!-- Form to handle search -->
             <form method="GET" action="browse.php">
-                <input type="hidden" name="category" value="<?php echo $category; ?>">
-                <input type="text" name="search" placeholder="Search your items" value="<?php echo $searchTerm; ?>">
+                <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+                <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -188,15 +190,13 @@ $result = mysqli_query($conn, $query);
             <?php
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    // Note: Removed htmlspecialchars here too
-                    $name = $row['name'];
-                    $category = $row['category'];
-                    $description = $row['description'];
-                    $location = $row['location'];
-                    $image = $row['image1'];
-                    $contact = $row['contact'];
+                    $name = htmlspecialchars($row['name']);
+                    $location = htmlspecialchars($row['location']);
+                    $description = htmlspecialchars($row['description']);
+                    $contact = htmlspecialchars($row['contact']);
+                    $image = htmlspecialchars($row['image1']);
                     ?>
-                    <div class="item">
+                    <a href="page.html" class="item">
                         <img src="<?php echo $image; ?>" alt="Item Image">
                         <div class="details">
                             <p><strong>Name:</strong> <?php echo $name; ?></p>
@@ -204,7 +204,7 @@ $result = mysqli_query($conn, $query);
                             <p><strong>Description:</strong> <?php echo $description; ?></p>
                             <p><strong>Contact:</strong> <?php echo $contact; ?></p>
                         </div>
-                    </div>
+                    </a>
                     <?php
                 }
             } else {
@@ -221,4 +221,3 @@ $result = mysqli_query($conn, $query);
 <footer><iframe src="footer.html"></iframe></footer>
 </body>
 </html>
-
