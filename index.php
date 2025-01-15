@@ -1,5 +1,5 @@
 <?php 
-session_start(); // Start the session at the beginning of the script
+session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -11,30 +11,30 @@ session_start(); // Start the session at the beginning of the script
       padding: 0;
       background-image: url(recources/background.png);
       background-position: center;
-      height: 100vh; /* Ensure the body takes up the full screen height */
+      height: 100vh;  
       display: flex;
       flex-direction: column;
       background-size: cover;
     }
     
-    /* Styling for the header iframe */
+    
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 9999;
-       /* Ensures the header is always on top */
+       
     }
 
-    /* Footer styling */
+   
     footer {
       height: 170px;
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #243642; /* Change background color as needed */
-      z-index: 90; /* Ensures the footer is below the header */
+      background-color: #243642; 
+      z-index: 90; 
     }
     
     iframe {
@@ -45,7 +45,7 @@ session_start(); // Start the session at the beginning of the script
       background-color: rgb(180, 62, 62);
     }
 
-    /* Optional: Make the content area take up the remaining space */
+    
     .content {
       flex: 5;
       display: flex;
@@ -58,7 +58,7 @@ session_start(); // Start the session at the beginning of the script
       font-family: Arial;
     }
 
-    /* Search bar styling */
+    
     .search-bar {
       display: flex;
     }
@@ -82,7 +82,7 @@ session_start(); // Start the session at the beginning of the script
       cursor: pointer;
     }
 
-    /*style*/
+    
     .catagories { 
       display: flex;
       justify-content: center;
@@ -105,31 +105,34 @@ session_start(); // Start the session at the beginning of the script
       border-radius: 4px;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animation */
+      transition: transform 0.2s ease, box-shadow 0.2s ease; 
     }
 
     .catagory:hover {
-      transform: scale(1.1); /* Enlarges the button to 1.2x its original size */
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adds a stronger shadow */
+      transform: scale(1.1); 
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
     }
 
     a {
       color: white;
     }
-    
+    .catagories a {
+    color: white;
+    text-decoration: none;
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
+  
   <header>
     <?php include("header.php"); ?>
   </header>
 
-  <!-- Main content area -->
+  
   <div class="content">
     <p>
       <?php
-      // Check if the user is logged in
+      
       if (isset($_SESSION['Username'])) {
           echo "Hello, " . $_SESSION['Username'] . "! Welcome back.";
       } else {
@@ -138,7 +141,7 @@ session_start(); // Start the session at the beginning of the script
       ?>
     </p>
   
-    <!-- Search bar -->
+    
     <div class="search-bar">
       <form id="search" action="browse.php" method="get">
         <input type="text" name="search" placeholder="What do you want for rent?" />
@@ -146,7 +149,7 @@ session_start(); // Start the session at the beginning of the script
       </form>
     </div>
   
-    <!-- Categories -->
+   
     <div class="catagories">
       <a href="browse.php?category=vehicles">
         <div class="catagory">Vehicles</div>
@@ -166,7 +169,7 @@ session_start(); // Start the session at the beginning of the script
     </div>
   </div>
 
-  <!-- Footer -->
+  
   <footer>
     <iframe src="footer.html"></iframe>
   </footer>
