@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $category = mysqli_real_escape_string($conn, $_POST['category']);
     $location = mysqli_real_escape_string($conn, $_POST['location']);
-
+    $email = $_SESSION['email'];
     // Insert item into the database (item_id is auto-increment)
-    $sql = "INSERT INTO items (name, description, category, location, contact) 
-            VALUES ('$title', '$description', '$category', '$location', '$contact')";
+    $sql = "INSERT INTO items (name, description, category, location, contact, Email) 
+            VALUES ('$title', '$description', '$category', '$location', '$contact', '$email')";
 
     if (mysqli_query($conn, $sql)) {
         // Get the last inserted item ID (auto-generated)
