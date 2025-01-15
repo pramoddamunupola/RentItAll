@@ -108,7 +108,6 @@
 <body>
 
     <div class="container">
-    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
         <form method="POST" action="SignIndata.php">
             <table>
                 <tr>
@@ -126,7 +125,10 @@
                     <td><input type="password" id="password" name="password" placeholder="Password" required></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td><div class="buttons">
+                            <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+                    </div>
+                </td>
                     <td>
                         <div class="buttons">
                             <button type="reset" class="cancel">Clear</button>
