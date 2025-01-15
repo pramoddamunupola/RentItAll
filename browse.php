@@ -12,11 +12,11 @@
             padding: 0;
         }
         header {
-    
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 9999;
+            position: static;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
             
         }
         footer {
@@ -28,7 +28,7 @@
             left: 0;
         }
         iframe {
-            width: 100%; update that the header also going up and down with respect to scroll the page 
+            width: 100%;
             height: 100%;
             border: none;
            
