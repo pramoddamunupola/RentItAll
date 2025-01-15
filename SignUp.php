@@ -71,7 +71,6 @@
         .buttons button {
             padding: 10px 20px;
             font-size: 16px;
-            border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -79,11 +78,13 @@
         .buttons .sign-up {
             background-color: #4CAF50;
             color: white;
+            border: none;
         }
 
         .buttons .cancel {
             background-color: #f44336;
             color: white;
+            border: none;
         }
 
         .login-link {
