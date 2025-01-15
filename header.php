@@ -123,9 +123,11 @@ button {
         <img src="recources/account.png" alt="account" class="account-icon">
       </label>
       <div class="dropdown-menu">
+        <a href="myitems.php" target="_top">My Items</a>
         <a href="SignUp.php" target="_top">Sign Up</a>
         <a href="signIn.php" target="_top">Sign In</a>
-        <a href="myitems.php" target="_top">My Items</a>
+        <a href="logout.php"target="_top">Log out</a>
+        
       </div>
     </div>
   </div>
