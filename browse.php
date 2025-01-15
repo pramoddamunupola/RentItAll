@@ -12,7 +12,7 @@
             padding: 0;
         }
         header {
-            position: relative;
+            position: static;
             top: 0;
             left: 0;
             width: 100%;
