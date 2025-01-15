@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <style>
         /* CSS remains unchanged */
         body {
@@ -14,7 +14,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            background-size: 100% 80%;
+            background-size: 100% 100%;
         }
         header {
             width: 100%;
