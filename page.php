@@ -84,18 +84,17 @@ if (isset($_GET['id'])) {
 
         .image-gallery {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
         }
 
         .main-image {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 400px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio while covering the box */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .thumbnail-container {
@@ -105,13 +104,13 @@ if (isset($_GET['id'])) {
         }
 
         .thumbnail-container img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: border-color 0.3s;
+            width: 60px; /* Fixed width for thumbnails */
+    height: 60px; /* Fixed height for thumbnails */
+    object-fit: cover; /* Maintain aspect ratio while covering the box */
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
         }
 
         .thumbnail-container img:hover,
