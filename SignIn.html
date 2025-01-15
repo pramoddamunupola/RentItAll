@@ -90,14 +90,21 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+
+        #error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div id="error-message"></div>
         <form method="POST" action="SignIn.php">
             <table>
                 <tr>
-                    <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td> 
+                    <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td>
                     <td><h1>RENTITALL</h1></td>
                 </tr>
                 <tr>
@@ -124,5 +131,12 @@
             © 2025. All rights reserved.
         </div>
     </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('error');
+        if (errorMessage) {
+            document.getElementById('error-message').innerText = errorMessage;
+        }
+    </script>
 </body>
 </html>
