@@ -1,21 +1,22 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// No whitespace, echo, or HTML before this point
+session_start();
+include("connection.php");
+
+if (isset($_POST['SignIn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Replace with your actual database validation logic
-    $correct_email = "user@example.com";
-    $correct_password = "password123";
+    $sql = "SELECT * FROM account_details WHERE email = '$email' AND password = '$password';";
+    $result = mysqli_query($conn, $sql);
 
-    if ($email === $correct_email && $password === $correct_password) {
-        // Successful login logic
-        header("Location: dashboard.php"); // Replace "dashboard.php" with your target page
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $_SESSION['email'] = $row['email'];
+        header("Location: /rentitall-main/index.html"); // Redirect
         exit();
     } else {
-        // Redirect back to the login page with an error message
-        $error = "Invalid username or password";
-        header("Location: SignIn.html?error=" . urlencode($error));
-        exit();
+        echo "Incorrect Email or Password";
     }
 }
 ?>
