@@ -12,11 +12,11 @@
             padding: 0;
         }
         header {
-    
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
             
         }
         footer {
