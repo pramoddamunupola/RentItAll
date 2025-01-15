@@ -60,7 +60,7 @@
         }
 
         .back-button{
-            padding: none;
+            padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
