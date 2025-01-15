@@ -15,7 +15,6 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: white;
   z-index: 9999; /* Ensure header stays on top */
 }
 
@@ -115,7 +114,7 @@ button {
     <a href="browse.php" target="_top">
       <button class="alladd-button">All ads</button>
     </a>
-    <a href="postad.html" target="_top">
+    <a href="postad.php" target="_top">
       <button class="postad-button" type="button">Post your ad</button>
     </a>
     <div class="account-menu-container">
@@ -124,8 +123,8 @@ button {
         <img src="recources/account.png" alt="account" class="account-icon">
       </label>
       <div class="dropdown-menu">
-        <a href="SignUp.html" target="_top">Sign Up</a>
-        <a href="SignIn.html" target="_top">Sign In</a>
+        <a href="SignUp.php" target="_top">Sign Up</a>
+        <a href="signIn.php" target="_top">Sign In</a>
         <a href="myitems.php" target="_top">My Items</a>
       </div>
     </div>

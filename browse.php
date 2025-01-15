@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            
             margin: 0;
             padding: 0;
         }
-        .header {
-            width: 100%;
-            height: 140px;
-            position: relative;
-            border: none;
+        header {
+    position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
             
         }
         footer {
@@ -37,6 +38,8 @@
             margin-bottom: 170px;
             padding: 20px;
             max-width: 1200px;
+            font-family: Arial, sans-serif;
+            margin-top: 130px;
 
         }
         .navigation {
@@ -130,6 +133,9 @@
         }
     </style>
 </head>
+<header>
+<?php include('header.php'); ?>
+</header>
 <body>
 <?php
 // Include database connection
@@ -159,7 +165,6 @@ if ($category !== "all" || !empty($searchTerm)) {
 $result = mysqli_query($conn, $query);
 ?>
 
-<?php include('header.php'); ?>
 
 <div class="container">
     <!-- Navigation -->

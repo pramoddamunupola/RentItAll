@@ -1,93 +1,301 @@
-<?php
-include("connection.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Check if the connection is successful
-    if ($conn === false) {
-        die("ERROR: Could not connect to the database.");
-    }
-
-    // Retrieve and sanitize form data
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
-    $contact = mysqli_real_escape_string($conn, $_POST['contact']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $category = mysqli_real_escape_string($conn, $_POST['category']);
-    $location = mysqli_real_escape_string($conn, $_POST['location']);
-
-    // Insert item into the database (item_id is auto-increment)
-    $sql = "INSERT INTO items (name, description, category, location, contact) 
-            VALUES ('$title', '$description', '$category', '$location', '$contact')";
-
-    if (mysqli_query($conn, $sql)) {
-        // Get the last inserted item ID (auto-generated)
-        $item_id = mysqli_insert_id($conn);
-
-        // Upload directory for images
-        $uploadDir = "uploads/";
-
-        // Ensure the uploads folder exists
-        if (!is_dir($uploadDir)) {
-            if (!mkdir($uploadDir, 0777, true)) {
-                die("Failed to create upload directory.");
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* CSS remains unchanged */
+        body {
+            margin: 0;
+            border: none;
+            left: 0;
+            justify-items: center;
+            align-items: center;
         }
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            
+        }
+        footer {
+            height: 170px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #243642;
+            z-index: 90;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            padding: 0;
+            height: 170px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            margin-left: 5%;
+            margin-right: 5%;
+            gap: 20px;
+            row-gap: 30%;
+            column-gap: 5%;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 800px;
+            flex-wrap: wrap;
+            font-size: larger;
+            margin-top: 170px;
+        }
+        .name {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .contact {
+            grid-column: 1;
+            grid-row: 2;
+            height: 120%;
+        }
+        .description {
+            grid-column: 2 / span 2;
+            grid-row: 1;
+        }
+        .category {
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .location {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        input {
+            width: 100%;
+            height: 50%;
+            max-width: 300px;
+            background-color: lightgray;
+            border: none;
+        }
+        select {
+            width: 100%;
+            height: 70%;
+            max-width: 300px;
+            background-color: lightgray;
+            border: none;
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            box-sizing: border-box;
+            background-color: lightgrey;
+            border: none;
+        }
+        .imagebox {
+            display: flex;
+            background-color: lightgrey;
+            margin-top: 100px;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1000px;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 1%;
+        }
+        h4 {
+            margin: 1%;
+            color: #053f18;
+        }
+        .imagebox input {
+            width: 18%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+        .addbottons {
+            display: flex;
+            flex-direction: column;
+            width: 17%;
+            margin-top: 1%;
+        }
+        button {
+            background-color: rgb(163, 67, 67);
+            border: none;
+            cursor: pointer;
+            color: white;
+            min-height: 30px;
+        }
+        .savemenu {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1000px;
+            justify-content: right;
+            box-sizing: border-box;
+            gap: 2%;
+            margin-top: 20px;
+        }
+        .savemenu button {
+            width: 13%;
+        }
+    </style>
+</head>
+<header>
+        <?php include("header.php"); ?>
+    </header>
+<body>
+    
+    <!-- Hidden form -->
+    <form id="adForm" action="postaddata.php" method="POST" enctype="multipart/form-data"></form>
 
-        // Array to store file paths of uploaded images
-        $imagePaths = [];
+    <div class="container">
+        <div class="name">
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" form="adForm">
+        </div>
+        <div class="contact">
+            <label for="contact">Contact</label><br>
+            <input type="text" id="contact" name="contact" form="adForm">
+        </div>
+        <div class="description">
+            <label for="description">Description</label><br>
+            <textarea id="description" name="description" form="adForm"></textarea>
+        </div>
+        <div class="category">
+            <label for="category">Category</label><br>
+            <select id="category" name="category" form="adForm">
+                <option value="Vehicles">Vehicles</option>
+                <option value="Property">Property</option>
+                <option value="Tools">Tools</option>
+            </select>
+        </div>
+        <div class="location">
+            <label for="location">Location</label><br>
+            <select id="location" name="location" form="adForm">
+                <option value="null">null</option>
+            </select>
+        </div>
+    </div>
 
-        // Iterate over uploaded files
-        foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-            if (!empty($tmpName)) {
-                // Check for any file upload errors
-                if ($_FILES['images']['error'][$key] != 0) {
-                    echo "Error uploading file " . $_FILES['images']['name'][$key] . ": " . $_FILES['images']['error'][$key];
-                    continue; // Skip to the next file
+    <div class="imagebox">
+        <center>
+            <h4>Add item images</h4>
+            <div>
+                <input type="file" id="image1" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image2" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image3" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image4" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image5" name="images[]" accept="image/*" form="adForm">
+            </div>
+        </center>
+    </div>
+
+    <div class="savemenu">
+        <button type="button" onclick="window.location.reload()">Cancel</button>
+        <button type="reset" form="adForm" id="clearButton">Clear</button>
+        <button type="submit" form="adForm">Post Ad</button>
+    </div>
+
+    <script>
+        const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
+        const clearButton = document.querySelector('#clearButton'); // Add an ID to your clear button
+
+        // Preview the image on file selection
+        imageInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        input.style.backgroundImage = `url(${event.target.result})`;
+                    };
+                    reader.readAsDataURL(file);
                 }
+            });
+        });
 
-                // Generate unique file name and path
-                $fileName = uniqid() . "-" . basename($_FILES['images']['name'][$key]);
-                $filePath = $uploadDir . $fileName;
+        // Clear selected images and reset background
+        clearButton.addEventListener('click', () => {
+            imageInputs.forEach(input => {
+                input.value = ''; // Clear the selected file
+                input.style.backgroundImage = ''; // Reset the background image
+            });
+        });
+       </script>
 
-                // Attempt to move the uploaded file to the uploads directory
-                if (move_uploaded_file($tmpName, $filePath)) {
-                    $imagePaths[] = $filePath;
-                } else {
-                    echo "Failed to upload file " . $_FILES['images']['name'][$key];
-                }
+    <script>
+        // Add form validation
+        document.getElementById('adForm').addEventListener('submit', function (event) {
+            let isValid = true; // Track overall validation status
+            let errorMessage = ""; // Collect error messages
+    
+            // Validate Title
+            const title = document.getElementById('title').value.trim();
+            if (!title) {
+                errorMessage += "Title is required.\n";
+                isValid = false;
             }
-        }
+    
+            // Validate Contact
+            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            const contact = document.getElementById('contact').value.trim();
+            if (!contactPattern.test(contact)) {
+                errorMessage += "Invalid contact format. Use XXX-XXX-XXXX.\n";
+                isValid = false;
+            }
+    
+            // Validate Description
+            const description = document.getElementById('description').value.trim();
+            if (!description) {
+                errorMessage += "Description is required.\n";
+                isValid = false;
+            }
+    
+            // Validate Category
+            const category = document.getElementById('category').value;
+            if (!category) {
+                errorMessage += "Category must be selected.\n";
+                isValid = false;
+            }
+    
+            // Validate Location
+            const location = document.getElementById('location').value;
+            if (!location || location === "null") {
+                errorMessage += "Location must be selected.\n";
+                isValid = false;
+            }
+    
+            // Validate Images
+            const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
+            let hasAtLeastOneImage = false;
+    
+            imageInputs.forEach(input => {
+                if (input.files.length > 0) {
+                    hasAtLeastOneImage = true; // Check if at least one image is uploaded
+                }
+            });
+    
+            if (!hasAtLeastOneImage) {
+                errorMessage += "At least one image must be uploaded.\n";
+                isValid = false;
+            }
+    
+            // If the form is not valid, prevent submission and show an alert
+            if (!isValid) {
+                alert("Form validation failed:\n" + errorMessage);
+                event.preventDefault();
+            }
+        });
+    </script>
+    
+    
 
-        // Fill missing image slots with NULL if fewer than 5 images are uploaded
-        while (count($imagePaths) < 5) {
-            $imagePaths[] = null;
-        }
-
-        // Update item with image paths in the database
-        $sqlImages = "UPDATE items SET image1 = ?, image2 = ?, image3 = ?, image4 = ?, image5 = ? WHERE id = ?";
-        $stmt = $conn->prepare($sqlImages);
-        $stmt->bind_param(
-            "sssssi",
-            $imagePaths[0],
-            $imagePaths[1],
-            $imagePaths[2],
-            $imagePaths[3],
-            $imagePaths[4],
-            $item_id
-        );
-
-        if ($stmt->execute()) {
-            echo "Item and images uploaded successfully!";
-        } else {
-            echo "Error saving images: " . $conn->error;
-        }
-
-        $stmt->close();
-    } else {
-        echo "Error saving item.";
-    }
-
-    // Close the connection
-    mysqli_close($conn);
-}
-?>}
+    <footer>
+        <iframe src="footer.html"></iframe>
+    </footer>
+</body>
+</html>
