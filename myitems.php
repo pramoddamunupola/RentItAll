@@ -201,6 +201,7 @@
                     $contact = $row['contact'];
                     ?>
                     <div class="item">
+                        
                         <img src="<?php echo $image; ?>" alt="Item Image">
                         <div class="details">
                             <p><strong>Name:</strong> <?php echo $name; ?></p>
