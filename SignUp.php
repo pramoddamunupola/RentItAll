@@ -104,7 +104,6 @@
 </head>
 <body>
     <div class="container">
-    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
         <form action="SignUpdata.php" method="post">
             <table>
                 <tr>
@@ -128,7 +127,9 @@
                     <td><input type="tel" id="phone" name="phone" placeholder="07xxxxxxxx" required></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td>
+                    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+                    </td>
                     <td>
                         <div class="buttons">
                             <button type="button" class="cancel">Clear</button>
