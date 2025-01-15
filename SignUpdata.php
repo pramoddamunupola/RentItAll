@@ -17,18 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$username', '$password', '$email', '$phone')";
 
         if (mysqli_query($conn, $sql)) {
-            echo "<html>
-                <body>
-                    <div style='text-align: left; margin-top: 20px;'>
-                        <p style='color: red;'>Incorrect Email or Password.</p>
-                        <button type='button' 
-                             onclick=\"window.location.href='SignIn.php';\" 
-                             style='padding: 10px 20px; background-color: rgb(5, 81, 16); color: white; border: none; border-radius: 5px; cursor: pointer;'>
-                             Back to Sign In
-                        </button>
-        </div>
-        </body>
-        </html>";
+            echo "New record created successfully!";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
