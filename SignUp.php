@@ -60,9 +60,9 @@
         }
 
         .back-button{
-            padding: 10px 10px;
+            padding: none;
             font-size: 16px;
-            border: 1px solid white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             color: white;
@@ -131,7 +131,7 @@
                     <td></td>
                     <td>
                         <div class="buttons">
-                            <button type="button" class="cancel">Cancel</button>
+                            <button type="button" class="cancel">Clear</button>
                             <button type="submit" class="sign-up">Sign Up</button>
                         </div>
                     </td>
