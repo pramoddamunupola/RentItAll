@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RentItAll</title>
     <style>
+        /* Your existing CSS */
         body {
             background-image: url(recources/background4.jpg);
-	    background-size: cover; 
+            background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: no-repeat;
             font-family: Arial, sans-serif;
             background-color: #FFFFFF;
             display: flex;
@@ -75,36 +76,48 @@
             background-color: red;
             color: white;
         }
-	
-
 
         p {
             color: #FFFFFF;
             text-decoration: none;
-		font-size: 12px;
+            font-size: 12px;
         }
 
         footer {
             margin-top: 20px;
             font-size: 10px;
             color: white;
-	          }
+        }
     </style>
+    <script>
+        function sendEmail() {
+            const message = document.querySelector('textarea').value;
+            const email = 'pramodashen14612@gmail.com';
+            if (message.trim()) {
+                window.location.href = `mailto:${email}?subject=Question&body=${encodeURIComponent(message)}`;
+            } else {
+                alert('Please enter a message before posting.');
+            }
+        }
+
+        function cancel() {
+            window.location.href = 'index.php';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="box">
             <h1>RENTITALL</h1>
-            <textarea placeholder="type your questions here..."></textarea>
+            <textarea placeholder="Type your questions here..."></textarea>
             <div class="buttons">
-                <button class="cancle">cancel</button>
-                <button class="post">Post</button>
+                <button class="cancel" onclick="cancel()">Cancel</button>
+                <button class="post" onclick="sendEmail()">Post</button>
             </div>
             <p style="font-size:20px">Hotline: 07781691</p>
-            <p>Don't have an account yet? <a href="SignUp.php"><b>Click here</b> to Sign up</a> to create one</p>
-	    <footer>&copy; 2024 All rights reserved</footer>
+            <p>Don't have an account yet? <a href="SignUp.php"><b>Click here</b> to Sign up</a> to create one</p>
+            <footer>&copy; 2024 All rights reserved</footer>
         </div>
-       
     </div>
 </body>
 </html>
