@@ -15,6 +15,7 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  background-color: white;
   z-index: 9999; /* Ensure header stays on top */
 }
 
@@ -69,16 +70,17 @@ button {
 }
 
 .dropdown-menu {
-  position: fixed;
-  top: 60px;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: none;
-  flex-direction: column;
-  width: 150px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Change to fixed to escape the iframe bounds */
+    top: 90px;
+    right: 10px; /* Adjust as needed */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2; /* Ensure it appears on top */
  
 }
 
@@ -103,7 +105,7 @@ button {
 <body>
 <header>
   <div class="left-section">
-    <a href="index.html" target="_top">
+    <a href="index.php" target="_top">
       <img src="recources/logo.png" alt="logo" height="130px">
     </a>
     <h1>RENTITALL<h1 style="color:red;">.lk</h1></h1>

@@ -37,8 +37,8 @@
       width: 100%;
       border: none;
       padding: 0;
-      height: 250px;
-      z-index: 9999;
+      height: 170px;
+      background-color: rgb(180, 62, 62);
     }
 
     /* Optional: Make the content area take up the remaining space */
@@ -120,7 +120,7 @@
 <body>
   <!-- Header -->
   <header>
-    <iframe src="header.php"></iframe>
+    <?php include("header.php"); ?>
   </header>
 
   <!-- Main content area -->

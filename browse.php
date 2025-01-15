@@ -159,7 +159,7 @@ if ($category !== "all" || !empty($searchTerm)) {
 $result = mysqli_query($conn, $query);
 ?>
 
-<header><iframe src="header.php" class="header"></iframe></header>
+<?php include('header.php'); ?>
 
 <div class="container">
     <!-- Navigation -->
