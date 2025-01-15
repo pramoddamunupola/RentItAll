@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* CSS remains unchanged */
         body {
@@ -9,7 +10,7 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-image: url('recources/background5.jpeg');
+            background-image: url('recources/background6.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
@@ -47,12 +48,13 @@
             gap: 20px;
             row-gap: 30%;
             column-gap: 5%;
-            width: 90%;
+            width: calc(100% - 20px);
             max-width: 1000px;
             max-height: 800px;
             flex-wrap: wrap;
             font-size: larger;
             margin-top: 170px;
+            margin-bottom: 170px;
         }
         .name {
             grid-column: 1;
