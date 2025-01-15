@@ -62,7 +62,7 @@
         .back-button{
             padding: 10px 20px;
             font-size: 16px;
-            border: 2px solid white;
+            border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
             color: white;
@@ -71,7 +71,7 @@
         .buttons button {
             padding: 10px 20px;
             font-size: 16px;
-            border: none;
+            border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
         }
