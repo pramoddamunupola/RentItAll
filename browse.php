@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* Make the body occupy full viewport height */
+            display: flex;
+            flex-direction: column;
         }
         header {
             position: static;
@@ -17,30 +20,36 @@
             left: 0;
             width: 100%;
             z-index: 9999;
-            
+            background-color: #387478;
+            color: white;
+            padding: 10px 20px;
         }
         footer {
             width: 100%;
             height: 170px;
-            border: none;
+            background-color: #387478;
+            color: white;
             position: fixed;
             bottom: 0;
             left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-           
+        }
+        .main-content {
+            flex-grow: 1; /* Allow this section to expand */
+            overflow-y: auto; /* Make this section scrollable */
+            padding-bottom: 20px;
         }
         .container {
             margin: 0 auto;
-            margin-bottom: 170px;
             padding: 20px;
             max-width: 1200px;
-            font-family: Arial, sans-serif;
-            margin-top: 130px;
-
         }
         .navigation {
             display: flex;
@@ -133,99 +142,75 @@
         }
     </style>
 </head>
-<header>
-<?php include('header.php'); ?>
-</header>
 <body>
-<?php
-// Include database connection
-include("connection.php");
+    <header>
+        <?php include('header.php'); ?>
+    </header>
 
-// Fetch category and search term from URL parameters
-$category = isset($_GET["category"]) ? $_GET["category"] : "all";
-$searchTerm = isset($_GET["search"]) ? $_GET["search"] : "";
+    <div class="main-content">
+        <div class="container">
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="back" onclick="history.back()">
+                    <i class="fa fa-angle-left"></i> Back
+                </button>
+                <div class="search-bar">
+                    <!-- Form to handle search -->
+                    <form method="GET" action="browse.php">
+                        <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+                        <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
 
-// Base query to fetch items
-$query = "SELECT * FROM items";
+            <div class="body1">
+                <!-- Left Navigation (Categories) -->
+                <div class="leftnavigation">
+                    <h4>Categories</h4>
+                    <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
+                    <p onclick="window.location.href='browse.php?category=properties'">Properties</p>
+                    <p onclick="window.location.href='browse.php?category=tools'">Tools</p>
+                    <p onclick="window.location.href='browse.php?category=party_items'">Party Items</p>
+                    <p onclick="window.location.href='browse.php?category=others'">Others</p>
+                </div>
 
-// Modify query based on category and search term
-if ($category !== "all" || !empty($searchTerm)) {
-    $query .= " WHERE";
-    if ($category !== "all") {
-        $query .= " category = '" . mysqli_real_escape_string($conn, $category) . "'";
-    }
-    if (!empty($searchTerm)) {
-        if ($category !== "all") {
-            $query .= " AND";
-        }
-        $query .= " (name LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR description LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR location LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%')";
-    }
-}
-
-$result = mysqli_query($conn, $query);
-?>
-
-
-<div class="container">
-    <!-- Navigation -->
-    <div class="navigation">
-        <button class="back" onclick="history.back()">
-            <i class="fa fa-angle-left"></i> Back
-        </button>
-        <div class="search-bar">
-            <!-- Form to handle search -->
-            <form method="GET" action="browse.php">
-                <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
-                <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="body1">
-        <!-- Left Navigation (Categories) -->
-        <div class="leftnavigation">
-            <h4>Categories</h4>
-            <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
-            <p onclick="window.location.href='browse.php?category=properties'">Properties</p>
-            <p onclick="window.location.href='browse.php?category=tools'">Tools</p>
-            <p onclick="window.location.href='browse.php?category=party_items'">Party Items</p>
-            <p onclick="window.location.href='browse.php?category=others'">Others</p>
-        </div>
-
-        <!-- Items -->
-        <div class="items">
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $name = htmlspecialchars($row['name']);
-                    $location = htmlspecialchars($row['location']);
-                    $description = htmlspecialchars($row['description']);
-                    $contact = htmlspecialchars($row['contact']);
-                    $image = htmlspecialchars($row['image1']);
-                    ?>
-                    <a href="page.php?id=<?php echo $row['id']; ?>" class="item">
-                        <img src="<?php echo $image; ?>" alt="Item Image">
-                        <div class="details">
-                            <p><strong>Name:</strong> <?php echo $name; ?></p>
-                            <p><strong>Location:</strong> <?php echo $location; ?></p>
-                            <p><strong>Description:</strong> <?php echo $description; ?></p>
-                            <p><strong>Contact:</strong> <?php echo $contact; ?></p>
-                        </div>
-                    </a>
+                <!-- Items -->
+                <div class="items">
                     <?php
-                }
-            } else {
-                echo "<p>No items found.</p>";
-            }
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $name = htmlspecialchars($row['name']);
+                            $location = htmlspecialchars($row['location']);
+                            $description = htmlspecialchars($row['description']);
+                            $contact = htmlspecialchars($row['contact']);
+                            $image = htmlspecialchars($row['image1']);
+                            ?>
+                            <a href="page.php?id=<?php echo $row['id']; ?>" class="item">
+                                <img src="<?php echo $image; ?>" alt="Item Image">
+                                <div class="details">
+                                    <p><strong>Name:</strong> <?php echo $name; ?></p>
+                                    <p><strong>Location:</strong> <?php echo $location; ?></p>
+                                    <p><strong>Description:</strong> <?php echo $description; ?></p>
+                                    <p><strong>Contact:</strong> <?php echo $contact; ?></p>
+                                </div>
+                            </a>
+                            <?php
+                        }
+                    } else {
+                        echo "<p>No items found.</p>";
+                    }
 
-            // Close the database connection
-            mysqli_close($conn);
-            ?>
+                    // Close the database connection
+                    mysqli_close($conn);
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<footer><iframe src="footer.html"></iframe></footer>
+    <footer>
+        <iframe src="footer.html"></iframe>
+    </footer>
 </body>
 </html>
