@@ -60,19 +60,17 @@
         }
 
         .back-button{
-            padding: none;
+            padding: 10px 20px;
             font-size: 16px;
-            border: none;
+            border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
             color: white;
             background-color: transparent;
-            transition: background-color 0.3s, border-color 0.3s;
         }
         .buttons button {
             padding: 10px 20px;
             font-size: 16px;
-            border: none;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -80,11 +78,13 @@
         .buttons .sign-up {
             background-color: #4CAF50;
             color: white;
+            border: none;
         }
 
         .buttons .cancel {
             background-color: #f44336;
             color: white;
+            border: none;
         }
 
         .login-link {
@@ -104,7 +104,6 @@
 </head>
 <body>
     <div class="container">
-    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
         <form action="SignUpdata.php" method="post">
             <table>
                 <tr>
@@ -128,7 +127,11 @@
                     <td><input type="tel" id="phone" name="phone" placeholder="07xxxxxxxx" required></td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td>
+                        <div class = "buttons">
+                            <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+                        </div>
+                    </td>
                     <td>
                         <div class="buttons">
                             <button type="button" class="cancel">Clear</button>
