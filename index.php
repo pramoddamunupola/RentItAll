@@ -1,3 +1,7 @@
+<?php 
+session_start(); // Start the session at the beginning of the script
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +61,6 @@
     /* Search bar styling */
     .search-bar {
       display: flex;
-      
     }
 
     .search-bar input {
@@ -77,10 +80,9 @@
       background-color: rgb(126, 39, 39);
       font-size: 14px;
       cursor: pointer;
-      
     }
 
-        /*style*/
+    /*style*/
     .catagories { 
       display: flex;
       justify-content: center;
@@ -104,16 +106,16 @@
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animation */
-      
     }
+
     .catagory:hover {
       transform: scale(1.1); /* Enlarges the button to 1.2x its original size */
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Adds a stronger shadow */
     }
-    a{
+
+    a {
       color: white;
     }
-
     
   </style>
 </head>
@@ -125,7 +127,16 @@
 
   <!-- Main content area -->
   <div class="content">
-    <p></p>
+    <p>
+      <?php
+      // Check if the user is logged in
+      if (isset($_SESSION['Username'])) {
+          echo "Hello, " . $_SESSION['Username'] . "! Welcome back.";
+      } else {
+          echo "Welcome! Please <a href='SignIn.php'>Sign In</a> to start renting.";
+      }
+      ?>
+    </p>
   
     <!-- Search bar -->
     <div class="search-bar">
@@ -134,8 +145,7 @@
         <button type="submit">Search</button>
       </form>
     </div>
-    
-
+  
     <!-- Categories -->
     <div class="catagories">
       <a href="browse.php?category=vehicles">
