@@ -182,7 +182,7 @@
         <!-- Items -->
          <?php 
          if(isset($_SESSION['Username'])){ ?>
-            <div class="items">"
+            <div class="items">
 
           <?php  include("connection.php");
             // Query to fetch item details from the database
