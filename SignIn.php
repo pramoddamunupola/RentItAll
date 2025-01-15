@@ -23,6 +23,7 @@ if (isset($_POST['SignIn'])) {
     }
 }
 ?>
-<button type="button" onclick="alert('Hello world!')">Click Me!</button>
+<br>
+<button type="button" onclick=<a href="SignUp.html">Click Me!</a></button>
 </body>
 </html>
