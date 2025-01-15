@@ -131,7 +131,7 @@
                     <td></td>
                     <td>
                         <div class="buttons">
-                            <button type="button" class="cancel">Cancel</button>
+                            <button type="button" class="cancel">Clear</button>
                             <button type="submit" class="sign-up">Sign Up</button>
                         </div>
                     </td>
