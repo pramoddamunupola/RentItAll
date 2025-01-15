@@ -9,6 +9,11 @@
             left: 0;
             justify-items: center;
             align-items: center;
+            background-image: url('recources/back1.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-size: 100% 80%;
         }
         header {
             width: 100%;
@@ -176,7 +181,31 @@
         <div class="location">
             <label for="location">Location</label><br>
             <select id="location" name="location" form="adForm">
-                <option value="null">null</option>
+                <option value="ampara">ampara</option>
+                <option value="auradhapura">anuradhapura</option>
+                <option value="badulla">badulla</option>
+                <option value="batticola">batticola</option>
+                <option value="colombo">colombo</option>
+                <option value="dalle">galle</option>
+                <option value="gampaha">gampaha</option>
+                <option value="hambanthota">hambanthota</option>
+                <option value="jaffna">jaffna</option>
+                <option value="kaluthara">kaluthara</option>
+                <option value="kandy">kandy</option>
+                <option value="kagalle">kagalle</option>
+                <option value="kilinochchi">kilinochchi</option>
+                <option value="kurunagale">kurunagale</option>
+                <option value="mannar">mannar</option>
+                <option value="matale">matale</option>
+                <option value="mathara">mathara</option>
+                <option value="monaragala">monaragala</option>
+                <option value="nullmullathiw">mullathiw</option>
+                <option value="Nuwara eliya">Nuwara eliya</option>
+                <option value="polonnaruwa">polonnaruwa</option>
+                <option value="puttalam">puttalam</option>
+                <option value="Rathnapura">Rathnapura</option>
+                <option value="Trincomalee">trincomalee</option>
+                <option value="vawniya">vawniya</option>
             </select>
         </div>
     </div>
