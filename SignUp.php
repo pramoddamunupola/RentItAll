@@ -60,14 +60,13 @@
         }
 
         .back-button{
-            padding: 20px 20px;
+            padding: 10px 20px;
             font-size: 16px;
-            border: none;
+            border: 2px solid white;
             border-radius: 5px;
             cursor: pointer;
             color: white;
             background-color: transparent;
-            transition: background-color 0.3s, border-color 0.3s;
         }
         .buttons button {
             padding: 10px 20px;
@@ -128,7 +127,9 @@
                 </tr>
                 <tr>
                     <td>
-                    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+                        <div class = "buttons">
+                            <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+                        </div>
                     </td>
                     <td>
                         <div class="buttons">
