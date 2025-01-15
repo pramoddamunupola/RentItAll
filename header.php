@@ -125,7 +125,7 @@ button {
       </label>
       <div class="dropdown-menu">
         <a href="SignUp.html" target="_top">Sign Up</a>
-        <a href="signIn.html" target="_top">Sign In</a>
+        <a href="SignIn.html" target="_top">Sign In</a>
         <a href="myitems.php" target="_top">My Items</a>
       </div>
     </div>
