@@ -1,3 +1,6 @@
+<html>
+    <head></head>
+<body>
 <?php
 // No whitespace, echo, or HTML before this point
 session_start();
@@ -20,3 +23,6 @@ if (isset($_POST['SignIn'])) {
     }
 }
 ?>
+<button type="button" onclick="alert('Hello world!')">Click Me!</button>
+</body>
+</html>
