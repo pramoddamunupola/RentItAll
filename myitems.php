@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +11,15 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            
         }
         
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 140px;
-            z-index: 9999;
+           
+      top: 0;
+      left: 0;
+      width: 100%;
+    
         }
 
         footer {
@@ -42,6 +43,7 @@
             margin-bottom: 170px; /* Leave space for the footer */
             padding: 20px;
             max-width: 1200px;
+            font-family: Arial, sans-serif;
         }
 
         .navigation {
@@ -148,11 +150,10 @@
         }
     </style>
 </head>
-<body>
-
 <header>
-    <iframe src="header.php"></iframe>
-</header>
+    <?php include("header.php"); ?>
+  </header>
+<body>
 
 <div class="container">
     <div class="navigation">
@@ -179,11 +180,14 @@
         </div>
 
         <!-- Items -->
-        <div class="items">
-            <?php
-            include("connection.php");
+         <?php 
+         if(isset($_SESSION['Username'])){ ?>
+            <div class="items">"
+
+          <?php  include("connection.php");
             // Query to fetch item details from the database
-            $sql = "SELECT * FROM items";
+            $sql = "SELECT * FROM items WHERE Email = '" . $_SESSION['email'] . "'";
+
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
@@ -213,6 +217,7 @@
 
             // Close the database connection
             mysqli_close($conn);
+        } else {  echo"<p>Please sign in to see your items.</p>";}
             ?>
         </div>
     </div>
