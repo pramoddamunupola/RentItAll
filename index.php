@@ -106,7 +106,6 @@ session_start();
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease; 
-      text-decoration: none;
     }
 
     .catagory:hover {
@@ -117,7 +116,10 @@ session_start();
     a {
       color: white;
     }
-    
+    .catagories a {
+    color: white;
+    text-decoration: none;
+    }
   </style>
 </head>
 <body>
