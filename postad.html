@@ -219,7 +219,27 @@
                 input.style.backgroundImage = ''; // Reset the background image
             });
         });
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Form verification
+        document.getElementById('adForm').addEventListener('submit', function (event) {
+            
+                        //title
+            const title = document.getElementById('title').value;
+
+            if (title.length == 0){
+                alert('please enter a title');
+                event.preventDefault();
+            }
+            
+            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            const contact = document.getElementById('contact').value;
+
+            if (!contactPattern.test(contact)) {
+                alert('Invalid Mobile Number format! Use XXX-XXX-XXXX');
+                event.preventDefault(); // Prevent form submission
+            }
     </script>
+    
 
     <footer>
         <iframe src="footer.html"></iframe>
