@@ -1,5 +1,15 @@
+<html>
+    <head></head>
+    <body>
+        <br>
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="button" 
+                onclick="window.location.href='SignUp.html';" 
+                style="padding: 10px 20px; background-color:rgb(5, 81, 16); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Back to Sign In
+    </button>
+</div>
 <?php
-
 session_start();
 include("connection.php");
 
@@ -20,3 +30,6 @@ if (isset($_POST['SignIn'])) {
     }
 }
 ?>
+
+</body>
+</html>
