@@ -60,9 +60,9 @@
         }
 
         .back-button{
-            padding: 10px 10px;
+            padding: none;
             font-size: 16px;
-            border: 1px solid white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             color: white;
