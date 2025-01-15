@@ -17,7 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$username', '$password', '$email', '$phone')";
 
         if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully!";
+            echo "<script>
+                    alert('Your account created successfully!!!');
+                    window.location.href = 'index.php';
+                  </script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
