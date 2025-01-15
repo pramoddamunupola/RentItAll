@@ -7,23 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
+            
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
         }
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 9999;
-            background-color: #387478;
-            color: white;
-            padding: 10px 20px;
-            transition: transform 0.3s ease-in-out;
-        }
-        header.hidden {
-            transform: translateY(-100%);
+    
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+            
         }
         footer {
             width: 100%;
@@ -34,15 +28,19 @@
             left: 0;
         }
         iframe {
-            width: 100%;
+            width: 100%; update that the header also going up and down with respect to scroll the page 
             height: 100%;
             border: none;
+           
         }
         .container {
             margin: 0 auto;
+            margin-bottom: 170px;
             padding: 20px;
             max-width: 1200px;
-            margin-top: 70px;
+            font-family: Arial, sans-serif;
+            margin-top: 130px;
+
         }
         .navigation {
             display: flex;
@@ -92,6 +90,13 @@
             border-radius: 5px;
             width: 200px;
         }
+        .leftnavigation p {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .leftnavigation p:hover {
+            text-decoration: underline;
+        }
         .items {
             flex-grow: 1;
             display: flex;
@@ -115,38 +120,112 @@
             object-fit: cover;
             border-radius: 5px;
         }
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .details p {
+            margin: 0;
+        }
+        .details strong {
+            color: #333;
+        }
     </style>
 </head>
+<header>
+<?php include('header.php'); ?>
+</header>
 <body>
-    <header id="header">
-        <?php include('header.php'); ?>
-    </header>
+<?php
+// Include database connection
+include("connection.php");
 
-    <div class="container">
-        <!-- Your main content here -->
+// Fetch category and search term from URL parameters
+$category = isset($_GET["category"]) ? $_GET["category"] : "all";
+$searchTerm = isset($_GET["search"]) ? $_GET["search"] : "";
+
+// Base query to fetch items
+$query = "SELECT * FROM items";
+
+// Modify query based on category and search term
+if ($category !== "all" || !empty($searchTerm)) {
+    $query .= " WHERE";
+    if ($category !== "all") {
+        $query .= " category = '" . mysqli_real_escape_string($conn, $category) . "'";
+    }
+    if (!empty($searchTerm)) {
+        if ($category !== "all") {
+            $query .= " AND";
+        }
+        $query .= " (name LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR description LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%' OR location LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%')";
+    }
+}
+
+$result = mysqli_query($conn, $query);
+?>
+
+
+<div class="container">
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="back" onclick="history.back()">
+            <i class="fa fa-angle-left"></i> Back
+        </button>
+        <div class="search-bar">
+            <!-- Form to handle search -->
+            <form method="GET" action="browse.php">
+                <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
+                <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </div>
 
-    <footer>
-        <iframe src="footer.html"></iframe>
-    </footer>
+    <div class="body1">
+        <!-- Left Navigation (Categories) -->
+        <div class="leftnavigation">
+            <h4>Categories</h4>
+            <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
+            <p onclick="window.location.href='browse.php?category=properties'">Properties</p>
+            <p onclick="window.location.href='browse.php?category=tools'">Tools</p>
+            <p onclick="window.location.href='browse.php?category=party_items'">Party Items</p>
+            <p onclick="window.location.href='browse.php?category=others'">Others</p>
+        </div>
 
-    <script>
-        let lastScrollTop = 0;
-        const header = document.getElementById("header");
-
-        window.addEventListener("scroll", () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop) {
-                // Scrolling down - hide header
-                header.classList.add("hidden");
+        <!-- Items -->
+        <div class="items">
+            <?php
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $name = htmlspecialchars($row['name']);
+                    $location = htmlspecialchars($row['location']);
+                    $description = htmlspecialchars($row['description']);
+                    $contact = htmlspecialchars($row['contact']);
+                    $image = htmlspecialchars($row['image1']);
+                    ?>
+                    <a href="page.php?id=<?php echo $row['id']; ?>" class="item">
+                        <img src="<?php echo $image; ?>" alt="Item Image">
+                        <div class="details">
+                            <p><strong>Name:</strong> <?php echo $name; ?></p>
+                            <p><strong>Location:</strong> <?php echo $location; ?></p>
+                            <p><strong>Description:</strong> <?php echo $description; ?></p>
+                            <p><strong>Contact:</strong> <?php echo $contact; ?></p>
+                        </div>
+                    </a>
+                    <?php
+                }
             } else {
-                // Scrolling up - show header
-                header.classList.remove("hidden");
+                echo "<p>No items found.</p>";
             }
 
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or overscroll
-        });
-    </script>
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
+        </div>
+    </div>
+</div>
+
+<footer><iframe src="footer.html"></iframe></footer>
 </body>
 </html>
