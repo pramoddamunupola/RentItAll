@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <style>
         /* CSS remains unchanged */
         body {
@@ -10,11 +9,11 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-image: url('recources/background6.jpg');
+            background-image: url('recources/background5.jpeg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            background-size: 100% 100%;
+            background-size: 100% 80%;
         }
         header {
             width: 100%;
@@ -48,13 +47,12 @@
             gap: 20px;
             row-gap: 30%;
             column-gap: 5%;
-            width: calc(100% - 20px);
+            width: 90%;
             max-width: 1000px;
             max-height: 800px;
             flex-wrap: wrap;
             font-size: larger;
             margin-top: 170px;
-            margin-bottom: 170px;
         }
         .name {
             grid-column: 1;

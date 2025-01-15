@@ -204,7 +204,7 @@ $result = mysqli_query($conn, $query);
                     $contact = htmlspecialchars($row['contact']);
                     $image = htmlspecialchars($row['image1']);
                     ?>
-                    <a href="page.html" class="item">
+                    <a href="page.php?id=<?php echo $row['id']; ?>" class="item">
                         <img src="<?php echo $image; ?>" alt="Item Image">
                         <div class="details">
                             <p><strong>Name:</strong> <?php echo $name; ?></p>
