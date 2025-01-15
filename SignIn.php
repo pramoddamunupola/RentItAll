@@ -111,7 +111,9 @@
         <form method="POST" action="SignIndata.php">
             <table>
                 <tr>
-                    <td><img src="recources/logo.png" alt="logo" width="150" height="150"></td> 
+                    <td><a href="index.php" target="_top">
+                            <img src="recources/logo.png" alt="logo" width="150" height="150">
+                    </a></td> 
                     <td><h1>RENTITALL</h1></td>
                 </tr>
                 <tr>
