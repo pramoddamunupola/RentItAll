@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -12,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
         
+        $_SESSION['Username'] = $row['Username'];
        
         $sql = "INSERT INTO account_details (Username, Password, Email, PhoneNumber) 
                 VALUES ('$username', '$password', '$email', '$phone')";
