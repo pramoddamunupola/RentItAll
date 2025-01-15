@@ -24,6 +24,12 @@ if (isset($_POST['SignIn'])) {
 }
 ?>
 <br>
-<button type="button" onclick=<a href="SignUp.html">Click Me!</a></button>
+<div style="text-align: center; margin-top: 20px;">
+    <button type="button" 
+        onclick="window.location.href='SignIn.html';" 
+        style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Back to Sign In
+    </button>
+</div>
 </body>
 </html>
