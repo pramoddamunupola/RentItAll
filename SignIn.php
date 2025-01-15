@@ -115,8 +115,7 @@
                     <td></td>
                     <td>
                         <div class="buttons">
-                            <a href="index.php">
-                            <button type="reset" class="cancel">Clear</button>
+                            <button class="cancel" onclick=<a href ="index.php"> Back</a></button>
                             <button type="submit" name="SignIn" class="sign-in">Sign In</button>
                         </div>
                     </td>

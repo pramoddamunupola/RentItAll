@@ -1,5 +1,5 @@
 <?php
-// No whitespace, echo, or HTML before this point
+
 session_start();
 include("connection.php");
 
@@ -13,7 +13,7 @@ if (isset($_POST['SignIn'])) {
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $_SESSION['email'] = $row['email'];
-        header("Location: /rentitall-main/index.html"); // Redirect
+        header("Location: /rentitall-main/index.html"); 
         exit();
     } else {
         echo "Incorrect Email or Password";
