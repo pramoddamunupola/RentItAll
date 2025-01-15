@@ -59,6 +59,16 @@
             margin-top: 20px;
         }
 
+        .back-button{
+            padding: 10px 10px;
+            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
         .buttons button {
             padding: 10px 20px;
             font-size: 16px;
@@ -94,6 +104,7 @@
 </head>
 <body>
     <div class="container">
+    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
         <form action="SignUpdata.php" method="post">
             <table>
                 <tr>

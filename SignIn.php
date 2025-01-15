@@ -18,6 +18,7 @@
             background-position: center;
             background-repeat: no-repeat; 
             color: white;
+            position: relative;
         }
 
         .container {
@@ -61,7 +62,16 @@
             justify-content: space-between;
             margin-top: 20px;
         }
-
+        .back-button{
+            padding: 10px 10px;
+            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background-color: transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
         .buttons button {
             padding: 10px 20px;
             font-size: 16px;
@@ -96,7 +106,9 @@
     </style>
 </head>
 <body>
+
     <div class="container">
+    <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
         <form method="POST" action="SignIndata.php">
             <table>
                 <tr>
@@ -115,7 +127,7 @@
                     <td></td>
                     <td>
                         <div class="buttons">
-                            <button class="cancel" onclick=<a href ="index.php"> Back</a></button>
+                            <button type="reset" class="cancel">Clear</button>
                             <button type="submit" name="SignIn" class="sign-in">Sign In</button>
                         </div>
                     </td>
