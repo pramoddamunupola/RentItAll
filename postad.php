@@ -9,7 +9,7 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-image: url('recources/back1.jpg');
+            background-image: url('recources/background5.jpeg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
@@ -37,6 +37,7 @@
             padding: 0;
             height: 170px;
         }
+
         .container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -85,7 +86,7 @@
             width: 100%;
             height: 70%;
             max-width: 300px;
-            background-color: lightgray;
+            background-color: lightgrey;
             border: none;
         }
         textarea {
@@ -106,6 +107,7 @@
             justify-content: center;
             box-sizing: border-box;
             padding: 1%;
+            border-radius: 2%;
         }
         h4 {
             margin: 1%;
@@ -126,6 +128,7 @@
             flex-direction: column;
             width: 17%;
             margin-top: 1%;
+            border-radius: 2%;
         }
         button {
             background-color: rgb(163, 67, 67);
@@ -133,6 +136,10 @@
             cursor: pointer;
             color: white;
             min-height: 30px;
+            border-radius: 2%;
+        }
+        button:hover{
+            background-color: rgb(163, 50, 67);
         }
         .savemenu {
             display: flex;
@@ -146,6 +153,7 @@
         }
         .savemenu button {
             width: 13%;
+            border-radius: 10%;
         }
     </style>
 </head>
@@ -273,7 +281,7 @@
             const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
-                errorMessage += "Invalid contact format. Use XXX-XXX-XXXX.\n";
+                errorMessage += "Invalid contact format. Use XXXXXXXXXX.\n";
                 isValid = false;
             }
     
