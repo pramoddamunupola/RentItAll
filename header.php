@@ -9,7 +9,7 @@ body {
 }
 
 header {
-  position: fixed;
+  position: relative;
   display: flex;
   padding: 0;
   align-items: center;
