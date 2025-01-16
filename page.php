@@ -84,17 +84,18 @@ if (isset($_GET['id'])) {
 
         .image-gallery {
             display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
         .main-image {
-            width: 400px; /* Fixed width */
-    height: 300px; /* Fixed height */
-    object-fit: cover; /* Maintain aspect ratio while covering the box */
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
         }
 
         .thumbnail-container {
@@ -104,13 +105,13 @@ if (isset($_GET['id'])) {
         }
 
         .thumbnail-container img {
-            width: 60px; /* Fixed width for thumbnails */
-    height: 60px; /* Fixed height for thumbnails */
-    object-fit: cover; /* Maintain aspect ratio while covering the box */
-    border-radius: 6px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.3s;
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
         }
 
         .thumbnail-container img:hover,
@@ -158,9 +159,57 @@ if (isset($_GET['id'])) {
         .back-btn:hover {
             background: #285f5e;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            max-width: 80%;
+            max-height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
     <script>
-        // JavaScript to handle image preview switching
+        // JavaScript to handle image preview switching and modal display
         function switchImage(src, thumbnail) {
             const mainImage = document.querySelector('.main-image');
             const thumbnails = document.querySelectorAll('.thumbnail-container img');
@@ -170,6 +219,18 @@ if (isset($_GET['id'])) {
             thumbnails.forEach(thumb => thumb.classList.remove('active'));
             thumbnail.classList.add('active');
         }
+
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
     </script>
 </head>
 <body>
@@ -177,7 +238,7 @@ if (isset($_GET['id'])) {
         <h1><?php echo $name; ?></h1>
         <div class="image-gallery">
             <!-- Main Image -->
-            <img class="main-image" src="<?php echo $images[0]; ?>" alt="Main Item Image">
+            <img class="main-image" src="<?php echo $images[0]; ?>" alt="Main Item Image" onclick="openModal(this.src)">
 
             <!-- Thumbnails -->
             <div class="thumbnail-container">
@@ -213,6 +274,14 @@ if (isset($_GET['id'])) {
 
         <!-- Back Button -->
         <a href="browse.php" class="back-btn">Back to Browse</a>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" alt="Expanded Item Image">
+        </div>
     </div>
 </body>
 </html>
