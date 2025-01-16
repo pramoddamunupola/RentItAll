@@ -1,19 +1,19 @@
 <?php
-// Start session if needed
+
 session_start();
 
-// Include database connection
+
 include("connection.php");
 
-// Initialize variables
+
 $name = $location = $description = $contact = "";
-$images = []; // Array to hold image paths
+$images = []; 
 
-// Get the item ID from the URL
+
 if (isset($_GET['id'])) {
-    $itemId = intval($_GET['id']); // Ensure the ID is an integer
+    $itemId = intval($_GET['id']); 
 
-    // Query to fetch the item's details
+    
     $query = "SELECT * FROM items WHERE id = $itemId";
     $result = mysqli_query($conn, $query);
 
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
         $description = htmlspecialchars($item['description']);
         $contact = htmlspecialchars($item['contact']);
 
-        // Gather image paths if available
+        
         for ($i = 1; $i <= 5; $i++) {
             $imageKey = "image" . $i;
             if (!empty($item[$imageKey])) {
@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $name; ?></title>
     <style>
-        /* General Reset and Styling */
+        
         * {
             margin: 0;
             padding: 0;
@@ -160,7 +160,7 @@ if (isset($_GET['id'])) {
             background: #285f5e;
         }
 
-        /* Modal Styles */
+       
         .modal {
             display: none;
             position: fixed;
@@ -209,7 +209,7 @@ if (isset($_GET['id'])) {
         }
     </style>
     <script>
-        // JavaScript to handle image preview switching and modal display
+        
         function switchImage(src, thumbnail) {
             const mainImage = document.querySelector('.main-image');
             const thumbnails = document.querySelectorAll('.thumbnail-container img');
@@ -237,10 +237,10 @@ if (isset($_GET['id'])) {
     <div class="container">
         <h1><?php echo $name; ?></h1>
         <div class="image-gallery">
-            <!-- Main Image -->
+            
             <img class="main-image" src="<?php echo $images[0]; ?>" alt="Main Item Image" onclick="openModal(this.src)">
 
-            <!-- Thumbnails -->
+           
             <div class="thumbnail-container">
                 <?php foreach ($images as $index => $imagePath): ?>
                     <img 
@@ -252,7 +252,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-        <!-- Details Table -->
+        
         <table class="details-table">
             <tr>
                 <th>Name</th>
@@ -272,11 +272,11 @@ if (isset($_GET['id'])) {
             </tr>
         </table>
 
-        <!-- Back Button -->
+        
         <a href="browse.php" class="back-btn">Back to Browse</a>
     </div>
 
-    <!-- Modal Structure -->
+    
     <div id="imageModal" class="modal">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <div class="modal-content">

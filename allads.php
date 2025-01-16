@@ -127,16 +127,16 @@
 </head>
 <body>
 <?php
-// Include database connection
+
 include("connection.php");
 
-// Fetch the search term from URL parameters (if any)
+
 $searchTerm = isset($_GET["search"]) ? mysqli_real_escape_string($conn, $_GET["search"]) : "";
 
-// Base query to fetch all items
+
 $query = "SELECT * FROM items";
 
-// Modify query based on the search term (if provided)
+
 if (!empty($searchTerm)) {
     $query .= " WHERE (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR location LIKE '%$searchTerm%')";
 }
@@ -147,13 +147,13 @@ $result = mysqli_query($conn, $query);
 <header><iframe src="header.php" class="header"></iframe></header>
 
 <div class="container">
-    <!-- Navigation -->
+   
     <div class="navigation">
         <button class="back" onclick="history.back()">
             <i class="fa fa-angle-left"></i> Back
         </button>
         <div class="search-bar">
-            <!-- Form to handle search -->
+            
             <form method="GET" action="browse.php">
                 <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
                 <button type="submit">Search</button>
@@ -162,7 +162,7 @@ $result = mysqli_query($conn, $query);
     </div>
 
     <div class="body1">
-        <!-- Left Navigation (Categories) -->
+        
         <div class="leftnavigation">
             <h4>Categories</h4>
             <p onclick="window.location.href='browse.php'">All Ads</p>
@@ -173,7 +173,7 @@ $result = mysqli_query($conn, $query);
             <p onclick="window.location.href='browse.php?category=others'">Others</p>
         </div>
 
-        <!-- Items -->
+       
         <div class="items">
             <?php
             if (mysqli_num_rows($result) > 0) {
@@ -200,7 +200,7 @@ $result = mysqli_query($conn, $query);
                 echo "<p>No items found.</p>";
             }
 
-            // Close the database connection
+            
             mysqli_close($conn);
             ?>
         </div>
