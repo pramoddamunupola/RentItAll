@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: Home/domains/rentitall.whf.bz/public_html/
+          server-dir: public_html/
           debug: true
           timeout: 300
           retry: 3
