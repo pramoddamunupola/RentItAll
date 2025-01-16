@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>About Us - RentItAll</title>
+    <title>About Us</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,13 +36,15 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
+            width: calc(25% - 20px); /* Dynamically adjust width based on available space */
+            min-width: 220px;
+            max-width: 250px;
             padding: 20px;
             text-align: center;
         }
         .team-card img {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             margin-bottom: 15px;
         }
@@ -59,12 +61,30 @@
         .team-card a:hover {
             text-decoration: underline;
         }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .back-button{
+            padding: 10px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: rgb(9, 9, 9);
+            background-color: transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Welcome to RentItAll</h1>
+    <div class="buttons">
+            <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+        </div>
+        <hr><h1>Welcome to RentItAll</h1><hr>
     <p>Your one-stop platform for renting a wide variety of items, including vehicles, properties, tools, party essentials, and more. Our mission is to simplify the rental process by providing a user-friendly web platform where individuals and businesses can easily list their items for rent or find the perfect rental solution for their needs.</p>
     <p>At RentItAll, we believe in the power of sharing resources and making them accessible to everyone. Whether you're looking for a car for a weekend getaway, a property for a short stay, specialized tools for a project, or party supplies for an event, we've got you covered. Our platform connects renters and owners, fostering a community of trust and convenience.</p>
     <br>
