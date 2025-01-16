@@ -25,40 +25,31 @@
         p {
             margin: 10px 0;
         }
-        .team-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
         }
-        .team-member {
-            width: 18%;
-            margin: 10px;
-            text-align: center;
+        table, th, td {
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            background: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .team-member img {
-            width: 100%;
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
         }
-        .team-member h3 {
-            margin: 10px 0 5px;
-        }
-        .team-member p {
-            margin: 5px 0;
-        }
-        .team-member .role {
-            font-weight: bold;
-        }
-        .team-member a {
+        a {
             color: #007BFF;
             text-decoration: none;
         }
-        .team-member a:hover {
+        a:hover {
             text-decoration: underline;
         }
     </style>
@@ -73,38 +64,44 @@
     <p>We are committed to offering a seamless rental experience with a focus on reliability, affordability, and customer satisfaction. Join us today and discover how RentItAll can help you find exactly what you need, when you need it.</p>
     <hr>
     <h2>Our Team</h2>
-    <div class="team-container">
-        <div class="team-member">
-            <img src="resources/4.jpg" alt="Pramod Damunupola">
-            <h3>Pramod Damunupola</h3>
-            <p><strong>Contact:</strong> 071 4158480</p>
-            <p><strong>Email:</strong> <a href="mailto:pramodashen14612@gmail.com">pramodashen14612@gmail.com</a></p>
-        </div>
-        <div class="team-member">
-            <img src="resources/3.jpg" alt="Gihan Pramod">
-            <h3>Gihan Pramod</h3>
-            <p><strong>Contact:</strong> 076 6628454</p>
-            <p><strong>Email:</strong> <a href="mailto:gihanpramod86@gmail.com">gihanpramod86@gmail.com</a></p>
-        </div>
-        <div class="team-member">
-            <img src="resources/5.jpg" alt="Chirath Rashmika">
-            <h3>Chirath Rashmika</h3>
-            <p><strong>Contact:</strong> 075 7026551</p>
-            <p><strong>Email:</strong> <a href="mailto:chirth2001@gmail.com">chirth2001@gmail.com</a></p>
-        </div>
-        <div class="team-member">
-            <img src="resources/2.jpg" alt="Dilshan Nayanajith">
-            <h3>Dilshan Nayanajith</h3>
-            <p><strong>Contact:</strong> 077 8001691</p>
-            <p><strong>Email:</strong> <a href="mailto:dilshan682@gmail.com">dilshan682@gmail.com</a></p>
-        </div>
-        <div class="team-member">
-            <img src="resources/1.jpg" alt="Sudeera Randunu">
-            <h3>Sudeera Randunu</h3>
-            <p><strong>Contact:</strong> 07</p>
-            <p><strong>Email:</strong> <a href="mailto:sudeera2001@gmail.com">sudeera2001@gmail.com</a></p>
-        </div>
-    </div>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td><img src="resources/4.jpg" alt="Pramod Damunupola"></td>
+            <td>Pramod Damunupola</td>
+            <td>071 4158480</td>
+            <td><a href="mailto:pramodashen14612@gmail.com">pramodashen14612@gmail.com</a></td>
+        </tr>
+        <tr>
+            <td><img src="resources/3.jpg" alt="Gihan Pramod"></td>
+            <td>Gihan Pramod</td>
+            <td>076 6628454</td>
+            <td><a href="mailto:gihanpramod86@gmail.com">gihanpramod86@gmail.com</a></td>
+        </tr>
+        <tr>
+            <td><img src="resources/5.jpg" alt="Chirath Rashmika"></td>
+            <td>Chirath Rashmika</td>
+            <td>075 7026551</td>
+            <td><a href="mailto:chirth2001@gmail.com">chirth2001@gmail.com</a></td>
+        </tr>
+        <tr>
+            <td><img src="resources/2.jpg" alt="Dilshan Nayanajith"></td>
+            <td>Dilshan Nayanajith</td>
+            <td>077 8001691</td>
+            <td><a href="mailto:dilshan682@gmail.com">dilshan682@gmail.com</a></td>
+        </tr>
+        <tr>
+            <td><img src="resources/1.jpg" alt="Sudeera Randunu"></td>
+            <td>Sudeera Randunu</td>
+            <td>076 0003623</td>
+            <td><a href="mailto:sudeera2001@gmail.com">sudeera2001@gmail.com</a></td>
+        </tr>
+    </table>
 </div>
 
 </body>
