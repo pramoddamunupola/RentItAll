@@ -1,28 +1,17 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
-        /* CSS remains unchanged */
         body {
             margin: 0;
-            border: none;
-            left: 0;
-            justify-items: center;
+            font-size: larger;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            background-image: url('recources/background5.jpeg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            background-size: 100% 80%;
+            background-color: rgba(24, 71, 49, 0.88);
         }
         header {
             width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            
         }
         footer {
             height: 170px;
@@ -38,142 +27,85 @@
             padding: 0;
             height: 170px;
         }
-
         .container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, auto);
-            margin-left: 5%;
-            margin-right: 5%;
+            margin: 20px 5%;
             gap: 20px;
             row-gap: 30%;
             column-gap: 5%;
             width: 90%;
             max-width: 1000px;
-            max-height: 800px;
-            flex-wrap: wrap;
-            font-size: larger;
+            background-image: url('');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-size: 100% 100%;
+        }
 
-        }
-        .name {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        .contact {
-            grid-column: 1;
-            grid-row: 2;
-            height: 120%;
-        }
-        .description {
-            grid-column: 2 / span 2;
-            grid-row: 1;
-        }
-        .category {
-            grid-column: 2;
-            grid-row: 2;
-        }
-        .location {
-            grid-column: 3;
-            grid-row: 2;
-        }
-        input {
+        input, select, textarea {
             width: 100%;
-            height: 50%;
-            max-width: 300px;
             background-color: lightgray;
             border: none;
-        }
-        select {
-            width: 100%;
-            height: 70%;
-            max-width: 300px;
-            background-color: lightgrey;
-            border: none;
+            box-sizing: border-box;
+            padding: 5px;
         }
         textarea {
-            width: 100%;
-            height: 100%;
             resize: none;
-            box-sizing: border-box;
-            background-color: lightgrey;
-            border: none;
         }
         .imagebox {
             display: flex;
             background-color: lightgrey;
-            margin-top: 100px;
+            margin-top: 30px;
             flex-wrap: wrap;
             width: 90%;
             max-width: 1000px;
             justify-content: center;
-            box-sizing: border-box;
+            align-content: center;
+            border-radius: 1%;
             padding: 1%;
-            border-radius: 2%;
         }
         h4 {
-            margin: 1%;
+            margin: 0.5%;
             color: #053f18;
         }
         .imagebox input {
             width: 18%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             aspect-ratio: 1/1;
             background-color: #ddd;
             background-size: cover;
             background-position: center;
             cursor: pointer;
         }
-        .addbottons {
+        .savemenu {
             display: flex;
-            flex-direction: column;
-            width: 17%;
-            margin-top: 1%;
-            border-radius: 2%;
+            justify-content: flex-end;
+            width: 90%;
+            max-width: 1000px;
+            gap: 10px;
+            margin-top: 20px;
         }
         button {
             background-color: rgb(163, 67, 67);
             border: none;
             cursor: pointer;
             color: white;
-            min-height: 30px;
-            border-radius: 2%;
-        }
-        button:hover{
-            background-color: rgb(163, 50, 67);
-        }
-        .savemenu {
-            display: flex;
-            flex-wrap: wrap;
-            width: 90%;
-            max-width: 1000px;
-            justify-content: right;
-            box-sizing: border-box;
-            gap: 2%;
-            margin-top: 20px;
-        }
-        .savemenu button {
-            width: 13%;
+            padding: 10px;
+            min-width: 80px;
+            text-align: center;
             border-radius: 10%;
         }
     </style>
 </head>
-<header>
-<?php 
-session_start(); 
-include("header.php"); 
-
-// Check if the user is logged in
-if (!isset($_SESSION['Username'])) {
-    echo '<script>alert("Please log in to post an item."); window.location.href = "SignIn.php";</script>';
-    exit(); // Stop further execution
-}
-?>
-</header>
 <body>
-    
+    <header>
+        <iframe src="header.php" title="header"></iframe>
+    </header>
+
     <!-- Hidden form -->
-    <form id="adForm" action="postaddata.php" method="POST" enctype="multipart/form-data"></form>
+    <form id="adForm" action="postad.php" method="POST" enctype="multipart/form-data"></form>
 
     <div class="container">
         <div class="name">
@@ -191,15 +123,13 @@ if (!isset($_SESSION['Username'])) {
         <div class="category">
             <label for="category">Category</label><br>
             <select id="category" name="category" form="adForm">
-                <option value="Vehicles">Vehicles</option>
-                <option value="Property">Property</option>
-                <option value="Tools">Tools</option>
+                <option value="null">null</option>
             </select>
         </div>
         <div class="location">
             <label for="location">Location</label><br>
             <select id="location" name="location" form="adForm">
-                <option value="ampara">ampara</option>
+                                <option value="ampara">ampara</option>
                 <option value="auradhapura">anuradhapura</option>
                 <option value="badulla">badulla</option>
                 <option value="batticola">batticola</option>
@@ -229,16 +159,14 @@ if (!isset($_SESSION['Username'])) {
     </div>
 
     <div class="imagebox">
-        <center>
-            <h4>Add item images</h4>
-            <div>
-                <input type="file" id="image1" name="images[]" accept="image/*" form="adForm">
-                <input type="file" id="image2" name="images[]" accept="image/*" form="adForm">
-                <input type="file" id="image3" name="images[]" accept="image/*" form="adForm">
-                <input type="file" id="image4" name="images[]" accept="image/*" form="adForm">
-                <input type="file" id="image5" name="images[]" accept="image/*" form="adForm">
-            </div>
-        </center>
+        <h4>Add item images</h4>
+        <div>
+            <input type="file" id="image1" name="images[]" accept="image/*" form="adForm">
+            <input type="file" id="image2" name="images[]" accept="image/*" form="adForm">
+            <input type="file" id="image3" name="images[]" accept="image/*" form="adForm">
+            <input type="file" id="image4" name="images[]" accept="image/*" form="adForm">
+            <input type="file" id="image5" name="images[]" accept="image/*" form="adForm">
+        </div>
     </div>
 
     <div class="savemenu">
@@ -268,14 +196,12 @@ if (!isset($_SESSION['Username'])) {
         // Clear selected images and reset background
         clearButton.addEventListener('click', () => {
             imageInputs.forEach(input => {
-                input.value = ''; // Clear the selected file
-                input.style.backgroundImage = ''; // Reset the background image
+                input.value = '';
+                input.style.backgroundImage = '';
             });
         });
-       </script>
 
-    <script>
-        // Add form validation
+       // Add form validation
         document.getElementById('adForm').addEventListener('submit', function (event) {
             let isValid = true; // Track overall validation status
             let errorMessage = ""; // Collect error messages
@@ -288,10 +214,10 @@ if (!isset($_SESSION['Username'])) {
             }
     
             // Validate Contact
-            const contactPattern = /^[0-9]{10}$/;
+            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
-                errorMessage += "Invalid contact format. Use 10 digits (XXXXXXXXXX).\n";
+                errorMessage += "Invalid contact format. Use XXXXXXXXXX.\n";
                 isValid = false;
             }
     
@@ -338,9 +264,12 @@ if (!isset($_SESSION['Username'])) {
             }
         });
     </script>
-    
+
     <footer>
         <iframe src="footer.html"></iframe>
     </footer>
 </body>
 </html>
+
+
+
