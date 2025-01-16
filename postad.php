@@ -10,7 +10,7 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-color: darkgreen;
+            background-color:rgb(24, 41, 34);
             background-size: cover;
             background-size: 100% 80%;
         }
