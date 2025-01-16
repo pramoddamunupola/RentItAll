@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
             max-height: 800px;
             flex-wrap: wrap;
             font-size: larger;
-            margin-top: 170px;
+
         }
         .name {
             grid-column: 1;
@@ -158,8 +159,17 @@
     </style>
 </head>
 <header>
-        <?php include("header.php"); ?>
-    </header>
+<?php 
+session_start(); 
+include("header.php"); 
+
+// Check if the user is logged in
+if (!isset($_SESSION['Username'])) {
+    echo '<script>alert("Please log in to post an item."); window.location.href = "SignIn.php";</script>';
+    exit(); // Stop further execution
+}
+?>
+</header>
 <body>
     
     <!-- Hidden form -->
@@ -239,7 +249,7 @@
 
     <script>
         const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
-        const clearButton = document.querySelector('#clearButton'); // Add an ID to your clear button
+        const clearButton = document.querySelector('#clearButton');
 
         // Preview the image on file selection
         imageInputs.forEach(input => {
@@ -278,10 +288,10 @@
             }
     
             // Validate Contact
-            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            const contactPattern = /^[0-9]{10}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
-                errorMessage += "Invalid contact format. Use XXXXXXXXXX.\n";
+                errorMessage += "Invalid contact format. Use 10 digits (XXXXXXXXXX).\n";
                 isValid = false;
             }
     
@@ -329,8 +339,6 @@
         });
     </script>
     
-    
-
     <footer>
         <iframe src="footer.html"></iframe>
     </footer>

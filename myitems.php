@@ -39,7 +39,6 @@
 
         .container {
             margin: 0 auto;
-            margin-top: 140px; /* Adjust to avoid content overlap with the header */
             margin-bottom: 170px; /* Leave space for the footer */
             padding: 20px;
             max-width: 1200px;

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
   <style>
 body {
   margin: 0;
@@ -9,7 +8,7 @@ body {
 }
 
 header {
-  position: fixed;
+  position: relative;
   display: flex;
   padding: 0;
   align-items: center;
@@ -107,7 +106,7 @@ button {
     <a href="index.php" target="_top">
       <img src="recources/logo.png" alt="logo" height="130px">
     </a>
-    <h1>RENTITALL<h1 style="color:red;">.lk</h1></h1>
+    <h1>RENTITALL<h1 style="color:red;">.whf.bz</h1></h1>
   </div>
 
   <div class="right-section">

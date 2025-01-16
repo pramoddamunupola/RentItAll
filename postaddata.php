@@ -2,11 +2,17 @@
 session_start(); 
 include("connection.php");
 
+// Check if the form is submitted via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Check if the connection is successful
+    // Verify the database connection
     if ($conn === false) {
         die("ERROR: Could not connect to the database.");
+    }
+
+    // Ensure the user is logged in
+    if (!isset($_SESSION['Username'])) {
+        die("ERROR: You must be logged in to add a post.");
     }
 
     // Retrieve and sanitize form data
@@ -15,13 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $category = mysqli_real_escape_string($conn, $_POST['category']);
     $location = mysqli_real_escape_string($conn, $_POST['location']);
-    $email = $_SESSION['email'];
-    // Insert item into the database (item_id is auto-increment)
+    $email = mysqli_real_escape_string($conn, $_SESSION['Username']); // Logged-in user's email
+
+    // Insert item into the database (item_id is auto-incremented)
     $sql = "INSERT INTO items (name, description, category, location, contact, Email) 
             VALUES ('$title', '$description', '$category', '$location', '$contact', '$email')";
 
     if (mysqli_query($conn, $sql)) {
-        // Get the last inserted item ID (auto-generated)
+        // Get the last inserted item ID
         $item_id = mysqli_insert_id($conn);
 
         // Upload directory for images
@@ -85,10 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->close();
     } else {
-        echo "Error saving item.";
+        echo "Error saving item: " . mysqli_error($conn);
     }
 
-    // Close the connection
+    // Close the database connection
     mysqli_close($conn);
 }
-?>}
+?>
