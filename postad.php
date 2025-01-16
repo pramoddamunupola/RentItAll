@@ -1,17 +1,28 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
+        /* CSS remains unchanged */
         body {
             margin: 0;
-            font-size: larger;
-            display: flex;
-            flex-direction: column;
+            border: none;
+            left: 0;
+            justify-items: center;
             align-items: center;
-            background-color: rgba(24, 71, 49, 0.88);
+            background-image: url('recources/background5.jpeg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-size: 100% 80%;
         }
         header {
             width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            
         }
         footer {
             height: 170px;
@@ -27,85 +38,142 @@
             padding: 0;
             height: 170px;
         }
+
         .container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, auto);
-            margin: 20px 5%;
+            margin-left: 5%;
+            margin-right: 5%;
             gap: 20px;
             row-gap: 30%;
             column-gap: 5%;
             width: 90%;
             max-width: 1000px;
-            background-image: url('');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            background-size: 100% 100%;
-        }
+            max-height: 800px;
+            flex-wrap: wrap;
+            font-size: larger;
 
-        input, select, textarea {
+        }
+        .name {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .contact {
+            grid-column: 1;
+            grid-row: 2;
+            height: 120%;
+        }
+        .description {
+            grid-column: 2 / span 2;
+            grid-row: 1;
+        }
+        .category {
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .location {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        input {
             width: 100%;
+            height: 50%;
+            max-width: 300px;
             background-color: lightgray;
             border: none;
-            box-sizing: border-box;
-            padding: 5px;
+        }
+        select {
+            width: 100%;
+            height: 70%;
+            max-width: 300px;
+            background-color: lightgrey;
+            border: none;
         }
         textarea {
+            width: 100%;
+            height: 100%;
             resize: none;
+            box-sizing: border-box;
+            background-color: lightgrey;
+            border: none;
         }
         .imagebox {
             display: flex;
             background-color: lightgrey;
-            margin-top: 30px;
+            margin-top: 100px;
             flex-wrap: wrap;
             width: 90%;
             max-width: 1000px;
             justify-content: center;
-            align-content: center;
-            border-radius: 1%;
+            box-sizing: border-box;
             padding: 1%;
+            border-radius: 2%;
         }
         h4 {
-            margin: 0.5%;
+            margin: 1%;
             color: #053f18;
         }
         .imagebox input {
             width: 18%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             aspect-ratio: 1/1;
             background-color: #ddd;
             background-size: cover;
             background-position: center;
             cursor: pointer;
         }
-        .savemenu {
+        .addbottons {
             display: flex;
-            justify-content: flex-end;
-            width: 90%;
-            max-width: 1000px;
-            gap: 10px;
-            margin-top: 20px;
+            flex-direction: column;
+            width: 17%;
+            margin-top: 1%;
+            border-radius: 2%;
         }
         button {
             background-color: rgb(163, 67, 67);
             border: none;
             cursor: pointer;
             color: white;
-            padding: 10px;
-            min-width: 80px;
-            text-align: center;
+            min-height: 30px;
+            border-radius: 2%;
+        }
+        button:hover{
+            background-color: rgb(163, 50, 67);
+        }
+        .savemenu {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1000px;
+            justify-content: right;
+            box-sizing: border-box;
+            gap: 2%;
+            margin-top: 20px;
+        }
+        .savemenu button {
+            width: 13%;
             border-radius: 10%;
         }
     </style>
 </head>
-<body>
-    <header>
-        <iframe src="header.php" title="header"></iframe>
-    </header>
+<header>
+<?php 
+session_start(); 
+include("header.php"); 
 
+// Check if the user is logged in
+if (!isset($_SESSION['Username'])) {
+    echo '<script>alert("Please log in to post an item."); window.location.href = "SignIn.php";</script>';
+    exit(); // Stop further execution
+}
+?>
+</header>
+<body>
+    
     <!-- Hidden form -->
-    <form id="adForm" action="postad.php" method="POST" enctype="multipart/form-data"></form>
+    <form id="adForm" action="postaddata.php" method="POST" enctype="multipart/form-data"></form>
 
     <div class="container">
         <div class="name">
@@ -123,13 +191,15 @@
         <div class="category">
             <label for="category">Category</label><br>
             <select id="category" name="category" form="adForm">
-                <option value="null">null</option>
+                <option value="Vehicles">Vehicles</option>
+                <option value="Property">Property</option>
+                <option value="Tools">Tools</option>
             </select>
         </div>
         <div class="location">
             <label for="location">Location</label><br>
             <select id="location" name="location" form="adForm">
-                                <option value="ampara">ampara</option>
+                <option value="ampara">ampara</option>
                 <option value="auradhapura">anuradhapura</option>
                 <option value="badulla">badulla</option>
                 <option value="batticola">batticola</option>
@@ -159,14 +229,16 @@
     </div>
 
     <div class="imagebox">
-        <h4>Add item images</h4>
-        <div>
-            <input type="file" id="image1" name="images[]" accept="image/*" form="adForm">
-            <input type="file" id="image2" name="images[]" accept="image/*" form="adForm">
-            <input type="file" id="image3" name="images[]" accept="image/*" form="adForm">
-            <input type="file" id="image4" name="images[]" accept="image/*" form="adForm">
-            <input type="file" id="image5" name="images[]" accept="image/*" form="adForm">
-        </div>
+        <center>
+            <h4>Add item images</h4>
+            <div>
+                <input type="file" id="image1" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image2" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image3" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image4" name="images[]" accept="image/*" form="adForm">
+                <input type="file" id="image5" name="images[]" accept="image/*" form="adForm">
+            </div>
+        </center>
     </div>
 
     <div class="savemenu">
@@ -186,7 +258,7 @@
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (event) {
-                        input.style.backgroundImage = `url(${event.target.result})`;
+                        input.style.backgroundImage = url(${event.target.result});
                     };
                     reader.readAsDataURL(file);
                 }
@@ -196,12 +268,14 @@
         // Clear selected images and reset background
         clearButton.addEventListener('click', () => {
             imageInputs.forEach(input => {
-                input.value = '';
-                input.style.backgroundImage = '';
+                input.value = ''; // Clear the selected file
+                input.style.backgroundImage = ''; // Reset the background image
             });
         });
+       </script>
 
-       // Add form validation
+    <script>
+        // Add form validation
         document.getElementById('adForm').addEventListener('submit', function (event) {
             let isValid = true; // Track overall validation status
             let errorMessage = ""; // Collect error messages
@@ -214,10 +288,10 @@
             }
     
             // Validate Contact
-            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            const contactPattern = /^[0-9]{10}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
-                errorMessage += "Invalid contact format. Use XXXXXXXXXX.\n";
+                errorMessage += "Invalid contact format. Use 10 digits (XXXXXXXXXX).\n";
                 isValid = false;
             }
     
@@ -264,12 +338,9 @@
             }
         });
     </script>
-
+    
     <footer>
         <iframe src="footer.html"></iframe>
     </footer>
 </body>
 </html>
-
-
-
