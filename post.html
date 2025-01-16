@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add posting page</title>
     <link href="stylesheet.css">
     <style>
@@ -239,12 +241,12 @@
         const fileInput = document.getElementById('fileInput');
         const imageContainer = document.getElementById('imageContainer');
 
-        
+        // Show file input dialog when button is clicked
         uploadButton.addEventListener('click', () => {
             fileInput.click();
         });
 
-        
+        // Display the selected images
         fileInput.addEventListener('change', (event) => {
             const files = Array.from(event.target.files);
             files.forEach(file => {
@@ -261,7 +263,7 @@
             });
         });
 
-        
+        // Remove the last image
         removeButton.addEventListener('click', () => {
             const images = imageContainer.querySelectorAll('img');
             if (images.length > 0) {

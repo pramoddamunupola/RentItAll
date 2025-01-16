@@ -1,8 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
-        
+        /* CSS remains unchanged */
         body {
             margin: 0;
             border: none;
@@ -52,7 +53,7 @@
             max-height: 800px;
             flex-wrap: wrap;
             font-size: larger;
-            margin-top: 170px;
+
         }
         .name {
             grid-column: 1;
@@ -158,11 +159,20 @@
     </style>
 </head>
 <header>
-        <?php include("header.php"); ?>
-    </header>
+<?php 
+session_start(); 
+include("header.php"); 
+
+// Check if the user is logged in
+if (!isset($_SESSION['Username'])) {
+    echo '<script>alert("Please log in to post an item."); window.location.href = "SignIn.php";</script>';
+    exit(); // Stop further execution
+}
+?>
+</header>
 <body>
     
-    
+    <!-- Hidden form -->
     <form id="adForm" action="postaddata.php" method="POST" enctype="multipart/form-data"></form>
 
     <div class="container">
@@ -239,9 +249,9 @@
 
     <script>
         const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
-        const clearButton = document.querySelector('#clearButton'); 
+        const clearButton = document.querySelector('#clearButton');
 
-        
+        // Preview the image on file selection
         imageInputs.forEach(input => {
             input.addEventListener('change', function () {
                 const file = this.files[0];
@@ -255,64 +265,64 @@
             });
         });
 
-        
+        // Clear selected images and reset background
         clearButton.addEventListener('click', () => {
             imageInputs.forEach(input => {
-                input.value = '';
-                input.style.backgroundImage = ''; 
+                input.value = ''; // Clear the selected file
+                input.style.backgroundImage = ''; // Reset the background image
             });
         });
        </script>
 
     <script>
-        
+        // Add form validation
         document.getElementById('adForm').addEventListener('submit', function (event) {
-            let isValid = true; 
-            let errorMessage = ""; 
+            let isValid = true; // Track overall validation status
+            let errorMessage = ""; // Collect error messages
     
-            
+            // Validate Title
             const title = document.getElementById('title').value.trim();
             if (!title) {
                 errorMessage += "Title is required.\n";
                 isValid = false;
             }
     
-            
-            const contactPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+            // Validate Contact
+            const contactPattern = /^[0-9]{10}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
-                errorMessage += "Invalid contact format. Use XXXXXXXXXX.\n";
+                errorMessage += "Invalid contact format. Use 10 digits (XXXXXXXXXX).\n";
                 isValid = false;
             }
     
-           
+            // Validate Description
             const description = document.getElementById('description').value.trim();
             if (!description) {
                 errorMessage += "Description is required.\n";
                 isValid = false;
             }
     
-            
+            // Validate Category
             const category = document.getElementById('category').value;
             if (!category) {
                 errorMessage += "Category must be selected.\n";
                 isValid = false;
             }
     
-            
+            // Validate Location
             const location = document.getElementById('location').value;
             if (!location || location === "null") {
                 errorMessage += "Location must be selected.\n";
                 isValid = false;
             }
     
-            
+            // Validate Images
             const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
             let hasAtLeastOneImage = false;
     
             imageInputs.forEach(input => {
                 if (input.files.length > 0) {
-                    hasAtLeastOneImage = true; 
+                    hasAtLeastOneImage = true; // Check if at least one image is uploaded
                 }
             });
     
@@ -321,7 +331,7 @@
                 isValid = false;
             }
     
-            
+            // If the form is not valid, prevent submission and show an alert
             if (!isValid) {
                 alert("Form validation failed:\n" + errorMessage);
                 event.preventDefault();
@@ -329,8 +339,6 @@
         });
     </script>
     
-    
-
     <footer>
         <iframe src="footer.html"></iframe>
     </footer>

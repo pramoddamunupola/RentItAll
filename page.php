@@ -1,19 +1,19 @@
 <?php
-
+// Start session if needed
 session_start();
 
-
+// Include database connection
 include("connection.php");
 
-
+// Initialize variables
 $name = $location = $description = $contact = "";
-$images = []; 
+$images = []; // Array to hold image paths
 
-
+// Get the item ID from the URL
 if (isset($_GET['id'])) {
-    $itemId = intval($_GET['id']); 
+    $itemId = intval($_GET['id']); // Ensure the ID is an integer
 
-    
+    // Query to fetch the item's details
     $query = "SELECT * FROM items WHERE id = $itemId";
     $result = mysqli_query($conn, $query);
 
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
         $description = htmlspecialchars($item['description']);
         $contact = htmlspecialchars($item['contact']);
 
-        
+        // Gather image paths if available
         for ($i = 1; $i <= 5; $i++) {
             $imageKey = "image" . $i;
             if (!empty($item[$imageKey])) {
@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $name; ?></title>
     <style>
-        
+        /* General Reset and Styling */
         * {
             margin: 0;
             padding: 0;
@@ -90,9 +90,9 @@ if (isset($_GET['id'])) {
         }
 
         .main-image {
-            width: 400px; 
-    height: 300px; 
-    object-fit: cover; 
+            width: 400px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    object-fit: cover; /* Maintain aspect ratio while covering the box */
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -104,9 +104,9 @@ if (isset($_GET['id'])) {
         }
 
         .thumbnail-container img {
-            width: 60px; 
-    height: 60px; 
-    object-fit: cover; 
+            width: 60px; /* Fixed width for thumbnails */
+    height: 60px; /* Fixed height for thumbnails */
+    object-fit: cover; /* Maintain aspect ratio while covering the box */
     border-radius: 6px;
     cursor: pointer;
     border: 2px solid transparent;
@@ -160,7 +160,7 @@ if (isset($_GET['id'])) {
         }
     </style>
     <script>
-       
+        // JavaScript to handle image preview switching
         function switchImage(src, thumbnail) {
             const mainImage = document.querySelector('.main-image');
             const thumbnails = document.querySelectorAll('.thumbnail-container img');
@@ -176,10 +176,10 @@ if (isset($_GET['id'])) {
     <div class="container">
         <h1><?php echo $name; ?></h1>
         <div class="image-gallery">
-            
+            <!-- Main Image -->
             <img class="main-image" src="<?php echo $images[0]; ?>" alt="Main Item Image">
 
-            
+            <!-- Thumbnails -->
             <div class="thumbnail-container">
                 <?php foreach ($images as $index => $imagePath): ?>
                     <img 
@@ -191,7 +191,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
-        
+        <!-- Details Table -->
         <table class="details-table">
             <tr>
                 <th>Name</th>
@@ -211,7 +211,7 @@ if (isset($_GET['id'])) {
             </tr>
         </table>
 
-        
+        <!-- Back Button -->
         <a href="browse.php" class="back-btn">Back to Browse</a>
     </div>
 </body>

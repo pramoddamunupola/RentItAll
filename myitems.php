@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -37,8 +39,7 @@
 
         .container {
             margin: 0 auto;
-            margin-top: 140px;
-            margin-bottom: 170px; 
+            margin-bottom: 170px; /* Leave space for the footer */
             padding: 20px;
             max-width: 1200px;
             font-family: Arial, sans-serif;
@@ -167,7 +168,7 @@
     </div>
 
     <div class="body1">
-        
+        <!-- Left Navigation (Categories) -->
         <div class="leftnavigation">
             <h4>Categories</h4>
             <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
@@ -177,19 +178,19 @@
             <p onclick="window.location.href='browse.php?category=others'">Others</p>
         </div>
 
-       
+        <!-- Items -->
          <?php 
          if(isset($_SESSION['Username'])){ ?>
             <div class="items">
 
           <?php  include("connection.php");
-            
+            // Query to fetch item details from the database
             $sql = "SELECT * FROM items WHERE Email = '" . $_SESSION['Username'] . "'";
 
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-                
+                // Loop through each row and fetch data
                 while ($row = mysqli_fetch_assoc($result)) {
                     $name = $row['name'];
                     $category = $row['category'];
@@ -214,7 +215,7 @@
                 echo "<p>No items found.</p>";
             }
 
-            
+            // Close the database connection
             mysqli_close($conn);
         } else {  echo"<p>Please sign in to see your items.</p>";}
             ?>
