@@ -8,13 +8,13 @@ body {
 }
 
 header {
-  position: fixed;
+  position: relative;
   display: flex;
   padding: 0;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  z-index: 9999; /* Ensure header stays on top */
+  z-index: 9999; 
 }
 
 .left-section {
@@ -68,9 +68,9 @@ button {
 }
 
 .dropdown-menu {
-    position: fixed; /* Change to fixed to escape the iframe bounds */
+    position: fixed; 
     top: 90px;
-    right: 10px; /* Adjust as needed */
+    right: 10px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -78,7 +78,7 @@ button {
     flex-direction: column;
     width: 150px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 2; /* Ensure it appears on top */
+    z-index: 2; 
  
 }
 
@@ -95,8 +95,7 @@ button {
 }
 
 .account-menu-checkbox:checked + label + .dropdown-menu {
-  display: flex; /* Show the dropdown when checkbox is checked */
-}
+  display: flex; 
 
   </style>
 </head>
