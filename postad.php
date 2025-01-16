@@ -10,7 +10,7 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-color: green;
+            background-color: darkgreen;
             background-size: cover;
             background-size: 100% 80%;
         }
