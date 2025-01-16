@@ -16,13 +16,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           server-dir: public_html/
+          create-directories: true
+          passive: true
           debug: true
           timeout: 300
           retry: 3
           retryDelay: 10
-
-
-
-
-
-
