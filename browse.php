@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -12,11 +10,11 @@
             padding: 0;
         }
         header {
-    
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 9999;
+            position: static;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
             
         }
         footer {
@@ -39,7 +37,7 @@
             padding: 20px;
             max-width: 1200px;
             font-family: Arial, sans-serif;
-           
+            margin-top: 130px;
 
         }
         .navigation {
@@ -138,17 +136,17 @@
 </header>
 <body>
 <?php
-// Include database connection
+
 include("connection.php");
 
-// Fetch category and search term from URL parameters
+
 $category = isset($_GET["category"]) ? $_GET["category"] : "all";
 $searchTerm = isset($_GET["search"]) ? $_GET["search"] : "";
 
-// Base query to fetch items
+
 $query = "SELECT * FROM items";
 
-// Modify query based on category and search term
+
 if ($category !== "all" || !empty($searchTerm)) {
     $query .= " WHERE";
     if ($category !== "all") {
@@ -167,13 +165,13 @@ $result = mysqli_query($conn, $query);
 
 
 <div class="container">
-    <!-- Navigation -->
+    
     <div class="navigation">
         <button class="back" onclick="history.back()">
             <i class="fa fa-angle-left"></i> Back
         </button>
         <div class="search-bar">
-            <!-- Form to handle search -->
+            
             <form method="GET" action="browse.php">
                 <input type="hidden" name="category" value="<?php echo htmlspecialchars($category); ?>">
                 <input type="text" name="search" placeholder="Search your items" value="<?php echo htmlspecialchars($searchTerm); ?>">
@@ -183,7 +181,7 @@ $result = mysqli_query($conn, $query);
     </div>
 
     <div class="body1">
-        <!-- Left Navigation (Categories) -->
+      
         <div class="leftnavigation">
             <h4>Categories</h4>
             <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
@@ -193,7 +191,7 @@ $result = mysqli_query($conn, $query);
             <p onclick="window.location.href='browse.php?category=others'">Others</p>
         </div>
 
-        <!-- Items -->
+        
         <div class="items">
             <?php
             if (mysqli_num_rows($result) > 0) {
@@ -219,7 +217,7 @@ $result = mysqli_query($conn, $query);
                 echo "<p>No items found.</p>";
             }
 
-            // Close the database connection
+            
             mysqli_close($conn);
             ?>
         </div>
