@@ -37,17 +37,28 @@
         p {
             margin: 10px 0;
         }
-       /* footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #19181c;
-            color: white;
+        .buttons {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
-        } */
+        }
+        .back-button{
+            padding: 10px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: rgb(9, 9, 9);
+            background-color: transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
     </style>
 </head>
 <body>
     <header>
+        <div class="buttons">
+            <button class="back-button" onclick="window.location.href='index.php'">< Back</button>
+        </div>
         <h1>Terms and Conditions</h1>
     </header>
     <main>
@@ -91,6 +102,7 @@
             <h2>10. Contact Us</h2>
             <p>If you have any questions or concerns about these Terms and Conditions, please <a href="Contact_us.html"><b>Contact us.</b></a></p>
         </section>
+        <p><center>© 2025.All rights reserved</center></p>
     </main>
    
 </body>
