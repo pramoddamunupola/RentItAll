@@ -10,7 +10,6 @@
             left: 0;
             justify-items: center;
             align-items: center;
-            background-image: url('recources/background5.jpeg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
