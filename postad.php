@@ -194,6 +194,8 @@ if (!isset($_SESSION['Username'])) {
                 <option value="Vehicles">Vehicles</option>
                 <option value="Property">Property</option>
                 <option value="Tools">Tools</option>
+                 <option value="Party_items">Party Items</option>
+                 <option value="Other">Other</option>
             </select>
         </div>
         <div class="location">
