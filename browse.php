@@ -187,8 +187,8 @@ $result = mysqli_query($conn, $query);
             <p onclick="window.location.href='browse.php?category=vehicles'">Vehicles</p>
             <p onclick="window.location.href='browse.php?category=Property'">Properties</p>
             <p onclick="window.location.href='browse.php?category=tools'">Tools</p>
-            <p onclick="window.location.href='browse.php?category=party_items'">Party Items</p>
-            <p onclick="window.location.href='browse.php?category=others'">Others</p>
+            <p onclick="window.location.href='browse.php?category=Party_items'">Party Items</p>
+            <p onclick="window.location.href='browse.php?category=Other"'">Others</p>
         </div>
 
         
