@@ -3,14 +3,15 @@
 <html lang="en">
 <head>
     <style>
-        
         body {
             margin: 0;
             border: none;
             left: 0;
             justify-items: center;
             align-items: center;
-            background-color:rgb(225, 225, 225);
+            background-image: url('recources/background5.jpeg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             background-size: cover;
             background-size: 100% 80%;
         }
@@ -161,14 +162,13 @@
 session_start(); 
 include("header.php"); 
 
-
 if (!isset($_SESSION['Username'])) {
     echo '<script>alert("Please log in to post an item."); window.location.href = "SignIn.php";</script>';
-    exit(); 
+    exit(); // Stop further execution
+}
 ?>
 </header>
 <body>
-    
     
     <form id="adForm" action="postaddata.php" method="POST" enctype="multipart/form-data"></form>
 
@@ -191,8 +191,6 @@ if (!isset($_SESSION['Username'])) {
                 <option value="Vehicles">Vehicles</option>
                 <option value="Property">Property</option>
                 <option value="Tools">Tools</option>
-                <option value="PartyItems">Party Items</option>
-                <option value="Others">Others</option>
             </select>
         </div>
         <div class="location">
@@ -250,43 +248,34 @@ if (!isset($_SESSION['Username'])) {
         const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
         const clearButton = document.querySelector('#clearButton');
 
-        
         imageInputs.forEach(input => {
             input.addEventListener('change', function () {
                 const file = this.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (event) {
-                        input.style.backgroundImage = url(${event.target.result});
+                        input.style.backgroundImage = `url(${event.target.result})`;
                     };
                     reader.readAsDataURL(file);
                 }
             });
         });
 
-        
         clearButton.addEventListener('click', () => {
             imageInputs.forEach(input => {
-                input.value = '';
-                input.style.backgroundImage = ''; 
             });
         });
        </script>
 
     <script>
-        
         document.getElementById('adForm').addEventListener('submit', function (event) {
-            let isValid = true; 
-            let errorMessage = ""; 
     
-            
             const title = document.getElementById('title').value.trim();
             if (!title) {
                 errorMessage += "Title is required.\n";
                 isValid = false;
             }
     
-            
             const contactPattern = /^[0-9]{10}$/;
             const contact = document.getElementById('contact').value.trim();
             if (!contactPattern.test(contact)) {
@@ -294,34 +283,29 @@ if (!isset($_SESSION['Username'])) {
                 isValid = false;
             }
     
-            
             const description = document.getElementById('description').value.trim();
             if (!description) {
                 errorMessage += "Description is required.\n";
                 isValid = false;
             }
     
-           
             const category = document.getElementById('category').value;
             if (!category) {
                 errorMessage += "Category must be selected.\n";
                 isValid = false;
             }
     
-            
             const location = document.getElementById('location').value;
             if (!location || location === "null") {
                 errorMessage += "Location must be selected.\n";
                 isValid = false;
             }
     
-            
             const imageInputs = document.querySelectorAll('.imagebox input[type="file"]');
             let hasAtLeastOneImage = false;
     
             imageInputs.forEach(input => {
                 if (input.files.length > 0) {
-                    hasAtLeastOneImage = true; 
                 }
             });
     
@@ -330,7 +314,6 @@ if (!isset($_SESSION['Username'])) {
                 isValid = false;
             }
     
-            
             if (!isValid) {
                 alert("Form validation failed:\n" + errorMessage);
                 event.preventDefault();
